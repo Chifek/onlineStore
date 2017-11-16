@@ -12,7 +12,7 @@ It takes few minutes, just run these commands step by step:
 
    `cd /path/to/your/directory`
   
-  `git clone -`
+  `git clone https://github.com/Chifek/onlineStore.git`
   
    `composer install`
   

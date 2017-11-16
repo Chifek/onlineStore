@@ -23,8 +23,10 @@ Links
 --------------
 
 * [**How to install Composer**][1]
+* [**How to install Git**][2]
 
 
 [1]:  https://getcomposer.org/
+[2]:  https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
 
 

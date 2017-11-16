@@ -10,11 +10,11 @@ How to install?
 
 It takes few minutes, just run these commands step by step:
 
-  * `cd /path/to/your/directory`
+   `cd /path/to/your/directory`
   
-  * `git clone -`
+  `git clone -`
   
-  * `composer install`
+   `composer install`
   
 
 Enjoy!

@@ -12,6 +12,16 @@
                 <p>
                     <a href="{{ path('contacts') }}">Contacts</a>
                 </p>
+                <h2>Create new post</h2>
+                <p>
+                    <form action="{{ path('senddata') }}" method="post">
+                        <label for="title_id">Title: </label>
+                        <input type="text" name="title" id="title_id"> <br>
+                        <label for="description_id">Description: </label> <br>
+                        <textarea id="description_id" name="description" autofocus></textarea> <br>
+                        <input type="submit" value="Send">
+                    </form>
+                </p>
             </div>
         </div>
     </div>

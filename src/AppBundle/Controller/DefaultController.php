@@ -38,6 +38,6 @@ class DefaultController extends Controller
         $em->persist($product);
         $em->flush();
 
-        return new Response('Saved new product with id '.$product->getId());
+        return $this->redirectToRoute('homepage');
     }
 }

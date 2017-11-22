@@ -5,6 +5,8 @@ namespace AppBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use AppBundle\Entity\Product;
+use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
 {
@@ -26,6 +28,16 @@ class DefaultController extends Controller
     {
         $requestAll = $request->request->all();
 
-        var_dump($requestAll);die;
+        $em = $this->getDoctrine()->getManager();
+
+        $product = new Product();
+        $product->setName($requestAll['title']);
+        $product->setPrice($requestAll['price']);
+        $product->setDescription($requestAll['description']);
+
+        $em->persist($product);
+        $em->flush();
+
+        return new Response('Saved new product with id '.$product->getId());
     }
 }

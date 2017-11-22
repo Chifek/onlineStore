@@ -4,30 +4,19 @@
     <div id="wrapper">
         <div id="container">
             <div id="welcome">
-                <h1><span>Welcome to</span> onlineStore
+                <h1><span>Products</span>
                 </h1>
             </div>
             <div id="next">
-                <h2>Menu</h2>
-                <p>
-                    <a href="{{ path('contacts') }}">Contacts</a>
-                </p>
-                <h2>Products</h2>
-                <p>
-                    <a href="{{ path('products') }}">Products</a>
-                </p>
-                <h2>Create new product: </h2>
-                <p>
-                    <form action="{{ path('senddata') }}" method="post">
-                        <label for="title_id">Name: </label>
-                        <input type="text" name="title" id="title_id"> <br>
-                    <label for="price_id">Price: </label>
-                        <input type="number" name="price" id="price_id"> <br>
-                        <label for="description_id">Description: </label> <br>
-                        <textarea id="description_id" name="description" autofocus></textarea> <br>
-                        <input type="submit" value="Send">
-                    </form>
-                </p>
+                {% for item in products %}
+
+
+                    <h2>Product # {{ item.id }}</h2>
+                    <p>
+                        Name: {{ item.name }} <br> Description: {{ item.description }}
+                    </p>
+                {% endfor %}
+                <a href="{{ path('homepage') }}">Main menu</a>
             </div>
         </div>
     </div>

@@ -36,8 +36,7 @@ class Products extends Controller
     {
         $repository = $this->getDoctrine()->getRepository(Product::class);
         $products = $repository->find($id);
-//        echo '<pre>';
-//        var_dump($products);die;
+
         return $this->render('products/viewProduct.html.twig', ['product' => $products]);
     }
 }

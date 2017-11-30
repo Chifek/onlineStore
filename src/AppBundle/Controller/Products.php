@@ -19,4 +19,25 @@ class Products extends Controller
 
         return $this->render('products/products.html.twig', ['products' => $products]);
     }
+
+    /**
+     * @Route("/product-create", name="createProduct")
+     */
+    public function createProduct()
+    {
+
+        return $this->render('products/newProducts.html.twig', []);
+    }
+
+    /**
+     * @Route("/product/{id}", name="view-product", requirements={"page": "\d+"} )
+     */
+    public function viewOneProduct($id)
+    {
+        $repository = $this->getDoctrine()->getRepository(Product::class);
+        $products = $repository->find($id);
+//        echo '<pre>';
+//        var_dump($products);die;
+        return $this->render('products/viewProduct.html.twig', ['product' => $products]);
+    }
 }

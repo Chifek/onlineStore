@@ -38,6 +38,6 @@ class DefaultController extends Controller
         $em->persist($product);
         $em->flush();
 
-        return $this->redirectToRoute('homepage');
+        return $this->redirectToRoute('products');
     }
 }

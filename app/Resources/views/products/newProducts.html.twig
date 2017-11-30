@@ -8,16 +8,19 @@
                 </h1>
             </div>
             <div id="next">
-                <h2>Menu</h2>
+                <h2>Create new product: </h2>
                 <p>
-                    <a href="{{ path('contacts') }}">Contacts</a>
+                <form action="{{ path('senddata') }}" method="post">
+                    <label for="title_id">Name: </label>
+                    <input type="text" name="title" id="title_id"> <br>
+                    <label for="price_id">Price: </label>
+                    <input type="number" name="price" id="price_id"> <br>
+                    <label for="description_id">Description: </label> <br>
+                    <textarea id="description_id" name="description" autofocus></textarea> <br>
+                    <input type="submit" value="Send">
+                </form>
                 </p>
-                <p>
-                    <a href="{{ path('products') }}">All products</a>
-                </p>
-                <p>
-                    <a href="{{ path('createProduct') }}">Create new product</a>
-                </p>
+                <a href="{{ path('homepage') }}">Main menu</a>
             </div>
         </div>
     </div>

@@ -8,16 +8,11 @@
                 </h1>
             </div>
             <div id="next">
-                <h2>Menu</h2>
+                <h2>{{ product.name }}</h2>
                 <p>
-                    <a href="{{ path('contacts') }}">Contacts</a>
+                    Price: {{ product.price }}<br> Description: {{ product.description }}
                 </p>
-                <p>
-                    <a href="{{ path('products') }}">All products</a>
-                </p>
-                <p>
-                    <a href="{{ path('createProduct') }}">Create new product</a>
-                </p>
+                <a href="{{ path('homepage') }}">Main menu</a>
             </div>
         </div>
     </div>

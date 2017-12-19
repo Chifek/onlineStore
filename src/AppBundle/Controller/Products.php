@@ -5,6 +5,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Product;
+use AppBundle\Entity\Category;
 use Symfony\Component\HttpFoundation\Response;
 
 class Products extends Controller
@@ -25,8 +26,10 @@ class Products extends Controller
      */
     public function createProduct()
     {
+        $repository = $this->getDoctrine()->getRepository(Category::class);
+        $categories = $repository->findAll();
 
-        return $this->render('products/newProducts.html.twig', []);
+        return $this->render('products/newProducts.html.twig', ['categories' => $categories]);
     }
 
     /**

@@ -13,11 +13,19 @@
                     <a href="{{ path('contacts') }}">Contacts</a>
                 </p>
                 <p>
-                    <a href="{{ path('products') }}">All products</a>
-                </p>
-                <p>
                     <a href="{{ path('createProduct') }}">Create new product</a>
+                    <a href="{{ path('createCategory') }}">Create new category</a>
                 </p>
+            </div>
+            <div id="next">
+                <h2>Category</h2>
+                <p>
+                    <a href="{{ path('products') }}">All products</a>
+                    <a href="{{ path('categories') }}">All categories</a>
+                </p>
+                {% for category in categories %}
+                    <p>{{ category.name }}</p>
+                {% endfor %}
             </div>
         </div>
     </div>

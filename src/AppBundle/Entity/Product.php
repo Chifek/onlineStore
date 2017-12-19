@@ -31,6 +31,11 @@ class Product
      */
     private $description;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $categoryId;
+
     public function setName($name)
     {
         $this->name = $name;
@@ -70,5 +75,17 @@ class Product
     public function getId()
     {
         return $this->id;
+    }
+
+    public function setCategory($categoryId)
+    {
+        $this->categoryId = $categoryId;
+
+        return $this;
+    }
+
+    public function getCategory()
+    {
+        return $this->categoryId;
     }
 }

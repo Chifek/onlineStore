@@ -8,21 +8,20 @@
                 </h1>
             </div>
             <div id="next">
-                <h2>Create new product: </h2>
+                <h2>Create new category: </h2>
                 <p>
-                <form action="{{ path('senddata') }}" method="post">
+                <form action="{{ path('saveCategory') }}" method="post">
                     <label for="title_id">Name: </label>
                     <input type="text" name="title" id="title_id"> <br>
-                    <label for="price_id">Price: </label>
-                    <input type="number" name="price" id="price_id"> <br>
                     <label for="description_id">Description: </label> <br>
                     <textarea id="description_id" name="description" autofocus></textarea> <br>
-                    <label for="categoryId">Category: </label>
-                    <select name="categoryId" id="categoryId">
-                        {% for item in categories %}
-                        <option value="{{ item.id }}">{{ item.name }}</option>
-                        {% endfor %}
-                    </select> <br>
+                    {#<label for="categoryId">Category: </label>#}
+                    {#<select name="categoryId" id="categoryId">#}
+                        {#<option>1</option>#}
+                        {#<option>2</option>#}
+                        {#<option>3</option>#}
+                        {#<option>4</option>#}
+                    {#</select> <br>#}
                     <input type="submit" value="Send">
                 </form>
                 </p>

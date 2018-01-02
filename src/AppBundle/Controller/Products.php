@@ -22,7 +22,7 @@ class Products extends Controller
     }
 
     /**
-     * @Route("/product-create", name="createProduct")
+     * @Route("/admin/product-create", name="createProduct")
      */
     public function createProduct()
     {

@@ -4,29 +4,29 @@
     <div id="wrapper">
         <div id="container">
             <div id="welcome">
-                <h1><span>Welcome to</span> onlineStore
+                <h1><span>Добро пожаловать в </span> админ.панель
                 </h1>
             </div>
             <div id="next">
-                <h2>Create new product: </h2>
+                <h2>Добавить новый товар: </h2>
                 <p>
                 <form action="{{ path('senddata') }}" method="post">
-                    <label for="title_id">Name: </label>
+                    <label for="title_id">Наименование: </label>
                     <input type="text" name="title" id="title_id"> <br>
-                    <label for="price_id">Price: </label>
+                    <label for="price_id">Цена: </label>
                     <input type="number" name="price" id="price_id"> <br>
-                    <label for="description_id">Description: </label> <br>
+                    <label for="description_id">Подробное описание: </label> <br>
                     <textarea id="description_id" name="description" autofocus></textarea> <br>
-                    <label for="categoryId">Category: </label>
+                    <label for="categoryId">Выберите категорию: </label>
                     <select name="categoryId" id="categoryId">
                         {% for item in categories %}
                         <option value="{{ item.id }}">{{ item.name }}</option>
                         {% endfor %}
                     </select> <br>
-                    <input type="submit" value="Send">
+                    <input type="submit" value="Сохранить">
                 </form>
                 </p>
-                <a href="{{ path('homepage') }}">Main menu</a>
+                <a href="{{ path('adminMainPage') }}">На главную админ.панели</a>
             </div>
         </div>
     </div>

@@ -4,15 +4,21 @@
     <div id="wrapper">
         <div id="container">
             <div id="welcome">
-                <h1><span>Добро пожаловать в </span> onlineStore
+                <h1><span>Добро пожаловать в </span> админ.панель
                 </h1>
+                <p>
+                    <a href="{{ path('homepage') }}">Перейти на сайт</a>
+                </p>
             </div>
             <div id="next">
-                <h2>{{ product.name }}</h2>
+                <h2>Редактор категорий/товаров</h2>
                 <p>
-                    Цена: {{ product.price }}<br> Описание: {{ product.description }}
+                    <a href="{{ path('contacts') }}">Наши контакты</a>
                 </p>
-                <a href="{{ path('homepage') }}">На главную</a>
+                <p>
+                <a href="{{ path('createProduct') }}">Создать новый товар</a>
+                <a href="{{ path('createCategory') }}">Создать новую категорию</a>
+                </p>
             </div>
         </div>
     </div>

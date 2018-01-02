@@ -4,18 +4,18 @@
     <div id="wrapper">
         <div id="container">
             <div id="welcome">
-                <a href="{{ path('homepage') }}">Main menu</a>
-                <h1><span>Categories</span>
+                <a href="{{ path('homepage') }}">На главную</a>
+                <h1><span>Все категории: </span>
                 </h1>
             </div>
             <div id="next">
                 {% for item in categories %}
-                    <h2 title="Price: {{ item.name }}"></h2>
+                    <h2 title="Цена: {{ item.name }}"></h2>
                     <p>
                         {{ item.name }}
                     </p>
                 {% endfor %}
-                <a href="{{ path('homepage') }}">Main menu</a>
+                <a href="{{ path('homepage') }}">На главную</a>
             </div>
         </div>
     </div>

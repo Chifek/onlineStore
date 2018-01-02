@@ -4,28 +4,21 @@
     <div id="wrapper">
         <div id="container">
             <div id="welcome">
-                <h1><span>Welcome to</span> onlineStore
+                <h1><span>Добро пожаловать в </span> админ.панель
                 </h1>
             </div>
             <div id="next">
-                <h2>Create new category: </h2>
+                <h2>Добавление категории: </h2>
                 <p>
                 <form action="{{ path('saveCategory') }}" method="post">
-                    <label for="title_id">Name: </label>
+                    <label for="title_id">Имя категории: </label>
                     <input type="text" name="title" id="title_id"> <br>
-                    <label for="description_id">Description: </label> <br>
+                    <label for="description_id">Описание категории: </label> <br>
                     <textarea id="description_id" name="description" autofocus></textarea> <br>
-                    {#<label for="categoryId">Category: </label>#}
-                    {#<select name="categoryId" id="categoryId">#}
-                        {#<option>1</option>#}
-                        {#<option>2</option>#}
-                        {#<option>3</option>#}
-                        {#<option>4</option>#}
-                    {#</select> <br>#}
-                    <input type="submit" value="Send">
+                    <input type="submit" value="Сохранить">
                 </form>
                 </p>
-                <a href="{{ path('homepage') }}">Main menu</a>
+                <a href="{{ path('adminMainPage') }}">На главную админ.панели</a>
             </div>
         </div>
     </div>

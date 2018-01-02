@@ -21,7 +21,7 @@ class Categories extends Controller
     }
 
     /**
-     * @Route("/category-create", name="createCategory")
+     * @Route("/admin/category-create", name="createCategory")
      */
     public function createCategory()
     {
@@ -43,6 +43,6 @@ class Categories extends Controller
         $em->persist($product);
         $em->flush();
 
-        return $this->redirectToRoute('categories');
+        return $this->redirectToRoute('adminMainPage');
     }
 }

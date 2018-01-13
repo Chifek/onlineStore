@@ -10,7 +10,7 @@
             </div>
             <div id="next">
                 {% for item in products %}
-                    <h2 title="Price: {{ item.price }}"><a href="{{ path('view-product', {'id': item.id}) }}">{{ item.name }}</a></h2>
+                    <h2 title="Цена: {{ item.price }}"><a href="{{ path('view-product', {'id': item.id}) }}">{{ item.name }}</a></h2>
                     <p>
                         {#Price: {{ item.price }}<br> Description: {{ item.description }}#}
                     </p>

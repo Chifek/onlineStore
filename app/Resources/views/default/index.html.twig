@@ -8,14 +8,15 @@
                 </h1>
             </div>
             <div id="next">
-                <h2>Меню</h2>
-                <p>
-                    <a href="{{ path('contacts') }}">Наши котакты</a>
-                </p>
-                <p>
-                    <a href="{{ path('products') }}">Все товары</a>
-                    <a href="{{ path('categories') }}">Все категории</a>
-                </p>
+                <h2>Каталог товаров: </h2>
+                {% for item in categories %}
+                    <a href="#" title="{{ item.description }}">{{ item.name }}</a>
+                {% endfor %}
+
+                <h2>Меню: </h2>
+                <a href="{{ path('contacts') }}">Наши контакты</a>
+                <a href="{{ path('products') }}">Все товары</a>
+                <a href="{{ path('categories') }}">Все категории</a>
             </div>
         </div>
     </div>

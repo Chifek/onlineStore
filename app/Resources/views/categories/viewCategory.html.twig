@@ -4,19 +4,17 @@
     <div id="wrapper">
         <div id="container">
             <div id="welcome">
-                <h1><span>Добро пожаловать в</span> onlineStore
+                <h1><span>Добро пожаловать в </span> onlineStore
                 </h1>
             </div>
             <div id="next">
-                <h2>Каталог товаров: </h2>
-                {% for item in categories %}
-                    <a href="{{ path('view-category', {'id': item.id}) }}" title="{{ item.description }}">{{ item.name }}</a>
+                {% for item in products %}
+                    <h2 title="Цена: {{ item.price }}"><a href="{{ path('view-product', {'id': item.id}) }}">{{ item.name }}</a></h2>
+                    <p>
+                        {#Price: {{ item.price }}<br> Description: {{ item.description }}#}
+                    </p>
                 {% endfor %}
-
-                <h2>Меню: </h2>
-                <a href="{{ path('contacts') }}">Наши контакты</a>
-                <a href="{{ path('products') }}">Все товары</a>
-                <a href="{{ path('categories') }}">Все категории</a>
+                <a href="{{ path('homepage') }}">На главную</a>
             </div>
         </div>
     </div>

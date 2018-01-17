@@ -7,19 +7,19 @@
                 <h1><span>Добро пожаловать в </span> админ.панель
                 </h1>
                 <p>
-                    <a href="{{ path('homepage') }}" target="_blank">Перейти на сайт</a>
+                    <a href="{{ path('adminMainPage') }}">Перейти на главную админ.панели</a>
                 </p>
             </div>
             <div id="next">
                 <h2>Редактор категорий/товаров</h2>
                 <p>
-                    <a href="{{ path('editContact') }}">Наши контакты</a>
-                </p>
-                <p>
-                <a href="{{ path('createProduct') }}">Создать новый товар</a>
-                </p>
-                <p>
-                <a href="{{ path('createCategory') }}">Создать новую категорию</a>
+                <form action="{{ path('saveContacts') }}" method="post">
+                    <label id="phone">Номер телефона: </label>
+                    <input type="text" id="phone" value=""> <br>
+                    <label id="address">Адрес: </label>
+                    <input type="text" id="address" value="">
+                    <input type="submit" value="Сохранить">
+                </form>
                 </p>
             </div>
         </div>
@@ -27,5 +27,5 @@
 {% endblock %}
 
 {% block stylesheets %}
-   
+
 {% endblock %}

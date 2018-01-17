@@ -6,6 +6,7 @@
             <div id="welcome">
                 <h1><span>Добро пожаловать в </span> админ.панель
                 </h1>
+                <a href="{{ path('adminMainPage') }}">На главную админ.панели</a>
             </div>
             <div id="next">
                 <h2>Добавить новый товар: </h2>
@@ -20,18 +21,17 @@
                     <label for="categoryId">Выберите категорию: </label>
                     <select name="categoryId" id="categoryId">
                         {% for item in categories %}
-                        <option value="{{ item.id }}">{{ item.name }}</option>
+                            <option value="{{ item.id }}">{{ item.name }}</option>
                         {% endfor %}
                     </select> <br>
                     <input type="submit" value="Сохранить">
                 </form>
                 </p>
-                <a href="{{ path('adminMainPage') }}">На главную админ.панели</a>
             </div>
         </div>
     </div>
 {% endblock %}
 
 {% block stylesheets %}
-   
+
 {% endblock %}

@@ -36,6 +36,11 @@ class Product
      */
     private $categoryId;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $discount;
+
     public function setName($name)
     {
         $this->name = $name;
@@ -87,5 +92,17 @@ class Product
     public function getCategory()
     {
         return $this->categoryId;
+    }
+
+    public function setDiscount($discount)
+    {
+        $this->discount = $discount;
+
+        return $this;
+    }
+
+    public function getDiscount()
+    {
+        return $this->discount;
     }
 }

@@ -10,7 +10,10 @@
             <div id="next">
                 <h2>{{ product.name }}</h2>
                 <p>
-                    Цена: {{ product.price }}<br> Описание: {{ product.description }}
+                    {% if(product.discount == 0) %} Цена: {{ product.price }} {% else %}
+                    Цена: <s> {{ product.price }} </s> <b style="color: red">{{ product.discount }}</b>
+                    {% endif %}
+                    <br> Описание: {{ product.description }}
                 </p>
                 <a href="{{ path('homepage') }}">На главную</a>
             </div>

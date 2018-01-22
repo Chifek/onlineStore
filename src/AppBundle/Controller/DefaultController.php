@@ -36,6 +36,9 @@ class DefaultController extends Controller
         $product = new Product();
         $product->setName($requestAll['title']);
         $product->setPrice($requestAll['price']);
+        if ($requestAll['discount'] === "") {
+            $product->setDiscount($requestAll['discount'] = 0);
+        }
         $product->setCategory($requestAll['categoryId']);
         $product->setDescription($requestAll['description']);
 

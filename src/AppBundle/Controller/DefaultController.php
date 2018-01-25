@@ -31,15 +31,21 @@ class DefaultController extends Controller
     public function sendData(Request $request)
     {
         $requestAll = $request->request->all();
-        $em = $this->getDoctrine()->getManager();
+//ISSUE#14 need resolve
+//        if (isset($requestAll['category']) === true) {
+////            $category = new Category();
+//        }
 
+        $em = $this->getDoctrine()->getManager();
         $product = new Product();
         $product->setName($requestAll['title']);
         $product->setPrice($requestAll['price']);
         if ($requestAll['discount'] === "") {
             $product->setDiscount($requestAll['discount'] = 0);
+        } else {
+            $product->setDiscount($requestAll['discount']);
         }
-//        $product->setBrand($requestAll['categoryId']);
+        $product->setBrand($requestAll['brandId']);
         $product->setDescription($requestAll['description']);
 
         $em->persist($product);

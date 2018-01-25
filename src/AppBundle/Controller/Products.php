@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Product;
 use AppBundle\Entity\Category;
+use AppBundle\Entity\Brands;
 use Symfony\Component\HttpFoundation\Response;
 
 class Products extends Controller
@@ -29,7 +30,10 @@ class Products extends Controller
         $repository = $this->getDoctrine()->getRepository(Category::class);
         $categories = $repository->findAll();
 
-        return $this->render('products/newProducts.html.twig', ['categories' => $categories]);
+        $repository = $this->getDoctrine()->getRepository(Brands::class);
+        $brands = $repository->findAll();
+
+        return $this->render('products/newProducts.html.twig', ['categories' => $categories, 'brands' => $brands]);
     }
 
     /**

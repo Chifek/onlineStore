@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div id="wrapper">
+        <div id="container">
+            <div id="welcome">
+                <a href="{{ path('homepage') }}">На главную</a>
+                <h1><span>Все бренды: </span>
+                </h1>
+            </div>
+            <div id="next">
+                {% for item in brands %}
+                    <p>
+                        <a href="{{ path('view-brand', {'id': item.id}) }}">{{ item.name }}</a>
+                    </p>
+                {% endfor %}
+                <a href="{{ path('homepage') }}">На главную</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div id="wrapper">
+        <div id="container">
+            <div id="welcome">
+                <h1><span>Добро пожаловать в </span> админ.панель
+                </h1>
+                <a href="{{ path('adminMainPage') }}">На главную админ.панели</a>
+            </div>
+            <div id="next">
+                <h2>Добавление бренда: </h2>
+                <p>
+                <form action="{{ path('saveBrand') }}" method="post">
+                    <label for="title_id">Имя бренда: </label>
+                    <input type="text" name="title" id="title_id"> <br>
+                    <label for="description_id">Описание бренда: </label> <br>
+                    <textarea id="description_id" name="description" autofocus></textarea> <br>
+                    <input type="submit" value="Сохранить">
+                </form>
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}

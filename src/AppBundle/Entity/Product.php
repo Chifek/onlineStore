@@ -34,7 +34,7 @@ class Product
     /**
      * @ORM\Column(type="integer")
      */
-    private $categoryId;
+    private $brandId;
 
     /**
      * @ORM\Column(type="integer")
@@ -82,16 +82,16 @@ class Product
         return $this->id;
     }
 
-    public function setCategory($categoryId)
+    public function setBrand($brandId)
     {
-        $this->categoryId = $categoryId;
+        $this->brandId = $brandId;
 
         return $this;
     }
 
-    public function getCategory()
+    public function getBrand()
     {
-        return $this->categoryId;
+        return $this->brandId;
     }
 
     public function setDiscount($discount)

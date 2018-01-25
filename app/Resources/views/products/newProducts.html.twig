@@ -20,13 +20,13 @@
 
                     <label for="description_id">Подробное описание: </label> <br>
                     <textarea id="description_id" name="description" required autofocus></textarea> <br>
-
-                    <label for="categoryId">Выберите категорию: </label>
-                    <select name="categoryId" id="categoryId">
-                        {% for item in categories %}
-                            <option value="{{ item.id }}">{{ item.name }}</option>
-                        {% endfor %}
-                    </select> <br>
+                    {# need add list of category#}
+                    {#<label for="categoryId">Выберите категорию: </label>#}
+                    {#<select name="categoryId" id="categoryId">#}
+                        {#{% for item in categories %}#}
+                            {#<option value="{{ item.id }}">{{ item.name }}</option>#}
+                        {#{% endfor %}#}
+                    {#</select> <br>#}
 
                     <label for="discount">Цена со скидкой: </label>
                     <input type="number" name="discount" id="discount"> <br>

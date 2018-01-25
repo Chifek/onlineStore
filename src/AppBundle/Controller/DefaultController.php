@@ -39,7 +39,7 @@ class DefaultController extends Controller
         if ($requestAll['discount'] === "") {
             $product->setDiscount($requestAll['discount'] = 0);
         }
-        $product->setCategory($requestAll['categoryId']);
+//        $product->setBrand($requestAll['categoryId']);
         $product->setDescription($requestAll['description']);
 
         $em->persist($product);

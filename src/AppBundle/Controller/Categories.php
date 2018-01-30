@@ -1,11 +1,14 @@
 <?php
+
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Product;
+use AppBundle\Entity\ProductCategory;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Category;
-use AppBundle\Entity\Product;
+//use AppBundle\Entity\ProductCategory;
 use Symfony\Component\HttpFoundation\Response;
 
 class Categories extends Controller
@@ -55,10 +58,17 @@ class Categories extends Controller
         $repository = $this->getDoctrine()->getRepository(Category::class);
         $categories = $repository->find($id);
 
-        $products = $this->getDoctrine()->getRepository(Product::class);
-        $getProduct = $products->findBy(array('categoryId' => $id));
+        $productsCat = $this->getDoctrine()->getRepository(ProductCategory::class);
+        $getProductCategory = $productsCat->findBy(array('categoryId' => $id));
 
-        return $this->render('categories/viewCategory.html.twig', 
+        $getProduct = array();
+        for ($i = 0; $i < count($getProductCategory); $i++) {
+            $id = $getProductCategory[$i]->getProductId();
+            $products = $this->getDoctrine()->getRepository(Product::class);
+            $getProduct[] = $products->findBy(array('id' => $id));
+        }
+
+        return $this->render('categories/viewCategory.html.twig',
             ['category' => $categories, 'products' => $getProduct]);
     }
 }

@@ -8,12 +8,20 @@
                 </h1>
             </div>
             <div id="next">
-                {% for item in products %}
-                    <h2 title="Цена: {{ item.price }}"><a href="{{ path('view-product', {'id': item.id}) }}">{{ item.name }}</a></h2>
-                    <p>
-                        {#Price: {{ item.price }}<br> Description: {{ item.description }}#}
-                    </p>
-                {% endfor %}
+                {% if products|length > 0 %}
+                    {% for key, items in products %}
+                        {% for value in items %}
+                            <h2 title="Цена: {{ value.price }}">{% if products|length > 0 %}<a
+                                    href="{{ path('view-product', {'id': value.id}) }}">{{ value.name }}</a> {% endif %}
+                            </h2>
+                            <p>
+                                Price: {{ value.price }}<br> Description: {{ value.description }}
+                            </p>
+                        {% endfor %}
+                    {% endfor %}
+                    {% else %}
+                        <p>На данный момент товаров нет</p>
+                {% endif %}
                 <a href="{{ path('homepage') }}">На главную</a>
             </div>
         </div>
@@ -22,6 +30,6 @@
 
 {% block stylesheets %}
     <style>
-        
+
     </style>
 {% endblock %}

@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Product;
+use AppBundle\Entity\ProductCategory;
 use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
@@ -31,10 +32,6 @@ class DefaultController extends Controller
     public function sendData(Request $request)
     {
         $requestAll = $request->request->all();
-//ISSUE#14 need resolve
-//        if (isset($requestAll['category']) === true) {
-////            $category = new Category();
-//        }
 
         $em = $this->getDoctrine()->getManager();
         $product = new Product();
@@ -50,6 +47,18 @@ class DefaultController extends Controller
 
         $em->persist($product);
         $em->flush();
+        $product->getId();
+
+        if (isset($requestAll['category']) === true) {
+            for ($i = 0; $i < count($requestAll['category']); $i++) {
+                $em = $this->getDoctrine()->getManager();
+                $productCategory = new ProductCategory();
+                $productCategory->setCategoryId($requestAll['category'][$i]);
+                $productCategory->setProductId($product->getId());
+                $em->persist($productCategory);
+                $em->flush();
+            }
+        }
 
         return $this->redirectToRoute('adminMainPage');
     }

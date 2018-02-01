@@ -24,8 +24,8 @@
             <div id="next">
                 <h2>Каталог товаров: </h2>
                 {% for item in categories %}
-                    <a href="{{ path('view-category', {'id': item.id}) }}"
-                       title="{{ item.description }}">{{ item.name }}</a>
+                    <p><a href="{{ path('view-category', {'id': item.id}) }}"
+                          title="{{ item.description }}">{{ item.name }}</a></p>
                 {% endfor %}
 
                 <h2>Меню: </h2>

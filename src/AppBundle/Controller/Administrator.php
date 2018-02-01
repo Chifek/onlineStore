@@ -1,6 +1,8 @@
 <?php
+
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Product;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -47,5 +49,29 @@ class Administrator extends Controller
         $em->flush();
 
         return $this->redirectToRoute('adminMainPage');
+    }
+
+    /**
+     * @Route("/admin/deleteProduct/{id}", name="deleteProduct")
+     */
+    public function deleteProduct($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $product = $em->getRepository(Product::class)->find($id);
+        $em->remove($product);
+        $em->flush();
+
+        return $this->redirectToRoute('adminMainPage');
+    }
+
+    /**
+     * @Route("/admin/productList", name="productsLists")
+     */
+    public function productsList()
+    {
+        $repository = $this->getDoctrine()->getRepository(Product::class);
+        $products = $repository->findAll();
+
+        return $this->render('administrator/products_list.html.twig', ['products' => $products]);
     }
 }

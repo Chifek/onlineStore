@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Category;
+use AppBundle\Entity\Brands;
 use Symfony\Component\HttpFoundation\Response;
 use AppBundle\Entity\Contacts;
 
@@ -73,5 +74,29 @@ class Administrator extends Controller
         $products = $repository->findAll();
 
         return $this->render('administrator/products_list.html.twig', ['products' => $products]);
+    }
+
+    /**
+     * @Route("/admin/brandsList", name="brandsLists")
+     */
+    public function brandsList()
+    {
+        $repository = $this->getDoctrine()->getRepository(Brands::class);
+        $brands = $repository->findAll();
+
+        return $this->render('administrator/brands_list.html.twig', ['brands' => $brands]);
+    }
+
+    /**
+     * @Route("/admin/deleteBrand/{id}", name="deleteBrand")
+     */
+    public function deleteBrand($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $brand = $em->getRepository(Brands::class)->find($id);
+        $em->remove($brand);
+        $em->flush();
+
+        return $this->redirectToRoute('adminMainPage');
     }
 }

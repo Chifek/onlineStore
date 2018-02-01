@@ -62,7 +62,7 @@ class Administrator extends Controller
         $em->remove($product);
         $em->flush();
 
-        return $this->redirectToRoute('adminMainPage');
+        return $this->redirectToRoute('productsLists');
     }
 
     /**
@@ -97,6 +97,30 @@ class Administrator extends Controller
         $em->remove($brand);
         $em->flush();
 
-        return $this->redirectToRoute('adminMainPage');
+        return $this->redirectToRoute('brandsLists');
+    }
+
+    /**
+     * @Route("/admin/categoriesList", name="categoriesList")
+     */
+    public function categoriesList()
+    {
+        $repository = $this->getDoctrine()->getRepository(Category::class);
+        $categories = $repository->findAll();
+
+        return $this->render('administrator/categories_list.html.twig', ['categories' => $categories]);
+    }
+
+    /**
+     * @Route("/admin/deleteCategory/{id}", name="deleteCategory")
+     */
+    public function deleteCategory($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $category = $em->getRepository(Category::class)->find($id);
+        $em->remove($category);
+        $em->flush();
+
+        return $this->redirectToRoute('categoriesList');
     }
 }

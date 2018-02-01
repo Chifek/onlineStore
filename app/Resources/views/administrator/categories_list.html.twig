@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div id="wrapper">
+        <div id="container">
+            <div id="welcome">
+                <h1><span>Добро пожаловать в </span> админ.панель
+                </h1>
+                <p>
+                    <a href="{{ path('adminMainPage') }}">Перейти в главное меню</a>
+                </p>
+            </div>
+            <div id="next">
+                <h2>Редактор категорий</h2>
+                {% for item in categories %}
+                    <p><a href="{{ path('view-category', {'id': item.id}) }}">{{ item.name }}</a></p>
+                    <form class="form-group" action="{{ path('deleteCategory', {'id': item.id}) }}" method="post">
+                        <input type="hidden" name="_method" value="delete">
+                        <button type="submit" class="btn btn-danger">
+                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete
+                        </button>
+                    </form>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}

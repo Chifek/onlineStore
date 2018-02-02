@@ -30,7 +30,7 @@ class Administrator extends Controller
     public function editContact()
     {
         $repository = $this->getDoctrine()->getRepository(Contacts::class);
-        $address = $repository->findAll();
+        $address = $repository->findBy(array('id' => 1));
 
         return $this->render('administrator/contacts_edit.html.twig', ['address' => $address]);
 
@@ -43,7 +43,7 @@ class Administrator extends Controller
     {
         $requestAll = $request->request->all();
         $em = $this->getDoctrine()->getManager();
-        $contacts = new Contacts();
+        $contacts = $em->getRepository(Contacts::class)->find($requestAll['id']);
         $contacts->setPhone($requestAll['phone']);
         $contacts->setAddress($requestAll['address']);
         $em->persist($contacts);

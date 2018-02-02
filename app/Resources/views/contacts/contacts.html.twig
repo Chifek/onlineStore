@@ -8,14 +8,10 @@
                 </h1>
             </div>
             <div id="next">
-                <h2>Телефон.:</h2>
-                <p>
-                    {{ tel }}
-                </p>
-                <h2>Имя компании:</h2>
-                <p>
-                    {{ company }}
-                </p>
+                {% for get in address %}
+                    <p>{{ get.phone }}</p>
+                    <p>{{ get.address }}</p>
+                {% endfor %}
                 <a href="{{ path('homepage') }}">На главную</a>
             </div>
         </div>

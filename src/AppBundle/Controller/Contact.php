@@ -1,27 +1,21 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: mavix
- * Date: 11/17/17
- * Time: 11:09 AM
- */
-
 namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use AppBundle\Entity\Contacts;
 
-class Contacts extends Controller
+class Contact extends Controller
 {
     /**
      * @Route("/contacts", name="contacts")
      */
     public function getContactsInfo()
     {
-        $tel = '0709552727';
-        $company = 'onlineStore';
+        $repository = $this->getDoctrine()->getRepository(Contacts::class);
+        $address = $repository->findBy(array('id' => 1));
 
-        return $this->render('contacts/contacts.html.twig', ['tel' => $tel, 'company' => $company]);
+        return $this->render('contacts/contacts.html.twig', ['address' => $address]);
     }
 }

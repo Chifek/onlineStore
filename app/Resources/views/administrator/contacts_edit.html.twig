@@ -13,13 +13,16 @@
             <div id="next">
                 <h2>Редактор категорий/товаров</h2>
                 <p>
+                {% for get in address %}
                 <form action="{{ path('saveContacts') }}" method="post">
                     <label id="phone">Номер телефона: </label>
-                    <input type="text" id="phone" value=""> <br>
+                    <input type="text" id="phone" value="{{ get.phone }}" name="phone"> <br>
+                    <input type="text" id="id" name="id" hidden value="1">
                     <label id="address">Адрес: </label>
-                    <input type="text" id="address" value="">
+                    <input type="text" id="address" value="{{ get.address }}" name="address">
                     <input type="submit" value="Сохранить">
                 </form>
+                {% endfor %}
                 </p>
             </div>
         </div>

@@ -13,11 +13,17 @@
             <div id="next">
                 <h2>Редактор брендов</h2>
                 {% for item in brands %}
-                    <p><a href="{{ path('view-brand', {'id': item.id}) }}">{{ item.name }}</a></p>
+                    {#<p><a href="{{ path('view-brand', {'id': item.id}) }}">{{ item.name }}</a></p>#}
+                    <form action="{{ path('editBrand', {'id': item.id}) }}" method="post">
+                        <input type="text" value="{{ item.name }}" name="brand">
+                        <button type="submit" class="btn btn-done">
+                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Сохранить
+                        </button>
+                    </form>
                     <form class="form-group" action="{{ path('deleteBrand', {'id': item.id}) }}" method="post">
                         <input type="hidden" name="_method" value="delete">
                         <button type="submit" class="btn btn-danger">
-                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete
+                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Удалить
                         </button>
                     </form>
                 {% endfor %}

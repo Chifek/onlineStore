@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div id="wrapper">
+        <div id="container">
+            <div id="welcome">
+                <h1><span>Добро пожаловать в </span> админ.панель
+                </h1>
+                <p>
+                    <a href="{{ path('adminMainPage') }}">Перейти в главное меню</a>
+                </p>
+            </div>
+            <div id="next">
+                <h2>Редактор товаров</h2>
+                <form action="{{ path('admin-save-product', {'id': product.id}) }}" method="post">
+                    <label for="productName">Наименование товара: </label>
+                    <input type="text" value="{{ product.name }}" id="productName" name="productName">
+                    <br>
+                    <label for="productPrice">Цена товара без скидки: </label>
+                    <input type="text" value="{{ product.price }}" id="productPrice" name="productPrice">
+                    <br>
+                    <label for="productDiscount">Цена товара со скидкой: </label>
+                    <input type="text" value="{{ product.discount }}" id="productDiscount" name="productDiscount">
+                    <br>
+                    <label for="productDescription">Описание товара: </label>
+                    <textarea id="productDescription" name="productDescription">{{ product.description }}</textarea>
+                    <br>
+                    <button type="submit" class="btn btn-done">
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Сохранить
+                    </button>
+                </form>
+                <hr>
+                <div id="next">
+                    <h2>Предпросмотр: </h2>
+                    <h3>{{ product.name }}</h3>
+                    <p>
+                        {% if(product.discount == 0) %} Цена: {{ product.price }} {% else %}
+                            Цена: <s> {{ product.price }} </s> <b style="color: red">{{ product.discount }}</b>
+                        {% endif %}
+                        <br> Описание: {{ product.description }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}

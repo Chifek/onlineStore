@@ -153,4 +153,34 @@ class Administrator extends Controller
 
         return $this->redirectToRoute('categoriesList');
     }
+
+    /**
+     * @Route("/admin/edit-product/{id}", name="admin-edit-product")
+     */
+    public function viewOneProduct($id)
+    {
+        $repository = $this->getDoctrine()->getRepository(Product::class);
+        $products = $repository->find($id);
+
+        return $this->render('administrator/edit_one_product.html.twig', ['product' => $products]);
+    }
+
+
+    /**
+     * @Route("/admin/save-product/{id}", name="admin-save-product")
+     */
+    public function saveOneProduct(Request $request, $id)
+    {
+        $requestAll = $request->request->all();
+        $em = $this->getDoctrine()->getManager();
+        $product = $em->getRepository(Product::class)->find($id);
+        $product->setName($requestAll['productName']);
+        $product->setPrice($requestAll['productPrice']);
+        $product->setDiscount($requestAll['productDiscount']);
+        $product->setDescription($requestAll['productDescription']);
+        $em->persist($product);
+        $em->flush();
+
+        return $this->redirectToRoute('productsLists');
+    }
 }

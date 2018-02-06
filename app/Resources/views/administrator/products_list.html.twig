@@ -11,15 +11,15 @@
                 </p>
             </div>
             <div id="next">
-                <h2>Редактор категорий/товаров</h2>
+                <h2>Редактор товаров</h2>
                 {% for item in products %}
-                    <p title="Цена: {{ item.price }}"><a href="{{ path('view-product', {'id': item.id}) }}">{{ item.name }}</a></p>
-                    <form class="form-group" action="{{ path('deleteProduct', {'id': item.id}) }}" method="post">
-                        <input type="hidden" name="_method" value="delete">
-                        <button type="submit" class="btn btn-danger">
-                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete
-                        </button>
-                    </form>
+                    <p title="Цена: {{ item.price }}"><a href="{{ path('admin-edit-product', {'id': item.id}) }}">{{ item.name }}</a></p>
+                    {#<form class="form-group" action="{{ path('deleteProduct', {'id': item.id}) }}" method="post">#}
+                        {#<input type="hidden" name="_method" value="delete">#}
+                        {#<button type="submit" class="btn btn-danger">#}
+                            {#<span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete#}
+                        {#</button>#}
+                    {#</form>#}
                 {% endfor %}
             </div>
         </div>

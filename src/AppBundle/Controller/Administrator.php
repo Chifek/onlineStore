@@ -123,4 +123,19 @@ class Administrator extends Controller
 
         return $this->redirectToRoute('categoriesList');
     }
+
+    /**
+     * @Route("/admin/editBrand/{id}", name="editBrand")
+     */
+    public function editBrand(Request $request, $id)
+    {
+        $requestAll = $request->request->all();
+        $em = $this->getDoctrine()->getManager();
+        $brand = $em->getRepository(Brands::class)->find($id);
+        $brand->setName($requestAll['brand']);
+        $em->persist($brand);
+        $em->flush();
+
+        return $this->redirectToRoute('brandsLists');
+    }
 }

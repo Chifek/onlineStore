@@ -138,4 +138,19 @@ class Administrator extends Controller
 
         return $this->redirectToRoute('brandsLists');
     }
+
+    /**
+     * @Route("/admin/editCategory/{id}", name="editCategory")
+     */
+    public function editCategory(Request $request, $id)
+    {
+        $requestAll = $request->request->all();
+        $em = $this->getDoctrine()->getManager();
+        $category = $em->getRepository(Category::class)->find($id);
+        $category->setName($requestAll['category']);
+        $em->persist($category);
+        $em->flush();
+
+        return $this->redirectToRoute('categoriesList');
+    }
 }

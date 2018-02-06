@@ -13,7 +13,13 @@
             <div id="next">
                 <h2>Редактор категорий</h2>
                 {% for item in categories %}
-                    <p><a href="{{ path('view-category', {'id': item.id}) }}">{{ item.name }}</a></p>
+                    {#<p><a href="{{ path('view-category', {'id': item.id}) }}">{{ item.name }}</a></p>#}
+                    <form action="{{ path('editCategory', {'id': item.id}) }}" method="post">
+                        <input type="text" value="{{ item.name }}" name="category">
+                        <button type="submit" class="btn btn-done">
+                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Сохранить
+                        </button>
+                    </form>
                     <form class="form-group" action="{{ path('deleteCategory', {'id': item.id}) }}" method="post">
                         <input type="hidden" name="_method" value="delete">
                         <button type="submit" class="btn btn-danger">

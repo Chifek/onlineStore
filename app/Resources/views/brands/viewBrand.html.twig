@@ -3,15 +3,11 @@
 {% block body %}
     <div id="wrapper">
         <div id="container">
-            <div id="welcome">
-                <h1><span>Добро пожаловать в </span> onlineStore
-                </h1>
-            </div>
             <div id="next">
                 {% for item in products %}
                     <p><a href="{{ path('view-product', {'id': item.id}) }}">{{ item.name }}</a></p>
                 {% endfor %}
-                <a href="{{ path('homepage') }}">На главную</a>
+
             </div>
         </div>
     </div>

@@ -1,4 +1,5 @@
 <?php
+
 namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -18,8 +19,9 @@ class Products extends Controller
     {
         $repository = $this->getDoctrine()->getRepository(Product::class);
         $products = $repository->findAll();
-
-        return $this->render('products/products.html.twig', ['products' => $products]);
+        $repository = $this->getDoctrine()->getRepository(Category::class);
+        $categories = $repository->findAll();
+        return $this->render('products/products.html.twig', ['products' => $products, 'categories' => $categories]);
     }
 
     /**
@@ -43,7 +45,8 @@ class Products extends Controller
     {
         $repository = $this->getDoctrine()->getRepository(Product::class);
         $products = $repository->find($id);
-
-        return $this->render('products/viewProduct.html.twig', ['product' => $products]);
+        $repository = $this->getDoctrine()->getRepository(Category::class);
+        $categories = $repository->findAll();
+        return $this->render('products/viewProduct.html.twig', ['product' => $products, 'categories' => $categories]);
     }
 }

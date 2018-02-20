@@ -29,10 +29,13 @@ class Administrator extends Controller
      */
     public function editContact()
     {
+        $repository = $this->getDoctrine()->getRepository(Category::class);
+        $categories = $repository->findAll();
+
         $repository = $this->getDoctrine()->getRepository(Contacts::class);
         $address = $repository->findBy(array('id' => 1));
 
-        return $this->render('administrator/contacts_edit.html.twig', ['address' => $address]);
+        return $this->render('administrator/contacts_edit.html.twig', ['address' => $address, 'categories' => $categories]);
 
     }
 
@@ -72,8 +75,10 @@ class Administrator extends Controller
     {
         $repository = $this->getDoctrine()->getRepository(Product::class);
         $products = $repository->findAll();
+        $repository = $this->getDoctrine()->getRepository(Category::class);
+        $categories = $repository->findAll();
 
-        return $this->render('administrator/products_list.html.twig', ['products' => $products]);
+        return $this->render('administrator/products_list.html.twig', ['products' => $products, 'categories' => $categories]);
     }
 
     /**
@@ -83,8 +88,10 @@ class Administrator extends Controller
     {
         $repository = $this->getDoctrine()->getRepository(Brands::class);
         $brands = $repository->findAll();
+        $repository = $this->getDoctrine()->getRepository(Category::class);
+        $categories = $repository->findAll();
 
-        return $this->render('administrator/brands_list.html.twig', ['brands' => $brands]);
+        return $this->render('administrator/brands_list.html.twig', ['brands' => $brands, 'categories' => $categories]);
     }
 
     /**
@@ -161,8 +168,9 @@ class Administrator extends Controller
     {
         $repository = $this->getDoctrine()->getRepository(Product::class);
         $products = $repository->find($id);
-
-        return $this->render('administrator/edit_one_product.html.twig', ['product' => $products]);
+        $repository = $this->getDoctrine()->getRepository(Category::class);
+        $categories = $repository->findAll();
+        return $this->render('administrator/edit_one_product.html.twig', ['product' => $products, 'categories' => $categories]);
     }
 
 

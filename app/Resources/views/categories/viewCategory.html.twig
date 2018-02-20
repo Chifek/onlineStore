@@ -3,10 +3,6 @@
 {% block body %}
     <div id="wrapper">
         <div id="container">
-            <div id="welcome">
-                <h1><span>Добро пожаловать в </span> onlineStore
-                </h1>
-            </div>
             <div id="next">
                 {% if products|length > 0 %}
                     {% for key, items in products %}
@@ -22,7 +18,7 @@
                     {% else %}
                         <p>На данный момент товаров нет</p>
                 {% endif %}
-                <a href="{{ path('homepage') }}">На главную</a>
+
             </div>
         </div>
     </div>

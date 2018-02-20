@@ -60,7 +60,8 @@ class Categories extends Controller
 
         $productsCat = $this->getDoctrine()->getRepository(ProductCategory::class);
         $getProductCategory = $productsCat->findBy(array('categoryId' => $id));
-
+        $repository = $this->getDoctrine()->getRepository(Category::class);
+        $categories1 = $repository->findAll();
         $getProduct = array();
         for ($i = 0; $i < count($getProductCategory); $i++) {
             $id = $getProductCategory[$i]->getProductId();
@@ -69,6 +70,6 @@ class Categories extends Controller
         }
 
         return $this->render('categories/viewCategory.html.twig',
-            ['category' => $categories, 'products' => $getProduct]);
+            ['category' => $categories, 'products' => $getProduct, 'categories' => $categories1]);
     }
 }

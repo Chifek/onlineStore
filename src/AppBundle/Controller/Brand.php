@@ -1,4 +1,5 @@
 <?php
+
 namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -6,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Brands;
 use AppBundle\Entity\Product;
+use AppBundle\Entity\Category;
 use Symfony\Component\HttpFoundation\Response;
 
 class Brand extends Controller
@@ -17,8 +19,9 @@ class Brand extends Controller
     {
         $repository = $this->getDoctrine()->getRepository(Brands::class);
         $brands = $repository->findAll();
-
-        return $this->render('brands/brands.html.twig', ['brands' => $brands]);
+        $repository = $this->getDoctrine()->getRepository(Category::class);
+        $categories = $repository->findAll();
+        return $this->render('brands/brands.html.twig', ['brands' => $brands, 'categories' => $categories]);
     }
 
     /**
@@ -53,8 +56,10 @@ class Brand extends Controller
     {
         $products = $this->getDoctrine()->getRepository(Product::class);
         $getProduct = $products->findBy(array('brandId' => $id));
-
+        $repository = $this->getDoctrine()->getRepository(Category::class);
+        $categories = $repository->findAll();
         return $this->render('brands/viewBrand.html.twig',
-            ['products' => $getProduct]);
+            ['products' => $getProduct,
+                'categories' => $categories]);
     }
 }

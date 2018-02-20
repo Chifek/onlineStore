@@ -29,8 +29,10 @@ class Categories extends Controller
      */
     public function createCategory()
     {
+        $repository = $this->getDoctrine()->getRepository(Category::class);
+        $categories = $repository->findAll();
 
-        return $this->render('categories/newCategory.html.twig', []);
+        return $this->render('categories/newCategory.html.twig', ['categories' => $categories]);
     }
 
     /**

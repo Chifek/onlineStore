@@ -19,7 +19,8 @@
                         <input type="number" name="price" id="price_id" required> <br>
 
                         <label for="description_id">Подробное описание: </label> <br>
-                        <textarea id="description_id" name="description" required autofocus></textarea> <br>
+                        <textarea id="description_id" name="description" required autofocus minlength="150"></textarea>
+                        <br>
                         Выберите категории:
 
                         {% for item in categories %}

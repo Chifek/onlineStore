@@ -29,7 +29,9 @@ class Brand extends Controller
      */
     public function createBrand()
     {
-        return $this->render('brands/newBrand.html.twig', []);
+        $repository = $this->getDoctrine()->getRepository(Category::class);
+        $categories = $repository->findAll();
+        return $this->render('brands/newBrand.html.twig', ['categories' => $categories]);
     }
 
     /**

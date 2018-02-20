@@ -62,4 +62,25 @@ class DefaultController extends Controller
 
         return $this->redirectToRoute('adminMainPage');
     }
+
+    /**
+     * @Route("/search", name="search")
+     */
+    public function searchProduct(Request $request)
+    {
+        $requestAll = $request->request->all();
+        $resultSearch = $requestAll['search'];
+        $products = $this->getDoctrine()->getRepository(Product::class);
+//        $getProduct = $products->search(array('name' => $resultSearch));
+        $getProduct = $products->findBy(array('name' => $resultSearch));
+        echo '<pre>';
+        var_dump($getProduct);die;
+        $repository = $this->getDoctrine()->getRepository(Category::class);
+        $categories = $repository->findAll();
+
+        return $this->render('search/search.html.twig', [
+            'categories' => $categories,
+            'products' => $getProduct
+        ]);
+    }
 }

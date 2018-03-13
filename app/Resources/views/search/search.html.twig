@@ -1,7 +1,56 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Результат поиска: </h1>
+    <div id="wrapper">
+        <div id="container">
+            <div style="margin-top: 40px;margin-right: 5px; margin-left: 20px">
+                <h3 style="font-size: 21px;color: #0088CC;">
+                    <span>Результат поиска:</span>
+                </h3>
+            </div>
+
+            <div id="next">
+                <div style="margin-right: 5px; margin-left: 5px;">
+                    <div style="min-height: 600px;">
+                        {% for item in result %}
+                            <div style="width: 25%; float: left; position: relative; min-height: 1px;
+                                        padding-right: 15px; padding-left: 15px;">
+                                <div style="border: 1px solid #ddddff; margin-bottom: 20px; overflow: auto; box-sizing: border-box;">
+                                    <div style="text-align: center">
+                                        <a href="https://demo.opencart.com/index.php?route=product/product&amp;product_id=43">
+                                            <img src="https://demo.opencart.com/image/cache/catalog/demo/macbook_1-200x200.jpg"
+                                                 alt="MacBook" title="MacBook" style="vertical-align: middle;"/></a>
+                                    </div>
+                                    <div style="padding: 0 20px; min-height: 180px">
+                                        <h4><a href="{{ path('view-product', {'id': item.id}) }}">{{ item.name }}</a>
+                                        </h4>
+                                        <p>{{ item.description |slice(0,150) }}</p>
+                                        <p style="color: black; margin: 0 0 10px;">
+                                            {% if(item.discount == 0) %}
+                                                <span style="font-weight: 600;">{{ item.price }} сомов</span>
+                                            {% else %}
+                                                <span style="font-weight: 600;color: red;">{{ item.price }}
+                                                    сомов</span>
+                                                <span style="color: #999; text-decoration: line-through; margin-left: 10px;">{{ item.discount }}
+                                                    сомов</span>
+                                            {% endif %}
+                                        </p>
+                                    </div>
+                                    <div style="border-top: 1px solid #ddd; background-color: #eee; overflow: auto;">
+                                        <button style="width: 100%; border: none; display: inline-block; float: left; background-color: #eee; color: #444;
+                                            line-height: 38px; font-weight: bold; text-align: center; text-transform: uppercase;">
+                                            <i class="fa fa-shopping-cart"></i>
+                                            <span>Заказать</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 {% block stylesheets %}

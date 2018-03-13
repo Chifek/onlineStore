@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Product;
 use AppBundle\Entity\ProductCategory;
 use Symfony\Component\HttpFoundation\Response;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class DefaultController extends Controller
 {
@@ -65,22 +66,20 @@ class DefaultController extends Controller
 
     /**
      * @Route("/search", name="search")
+     * @Method({"GET"})
      */
     public function searchProduct(Request $request)
     {
-        $requestAll = $request->request->all();
-        $resultSearch = $requestAll['search'];
-        $products = $this->getDoctrine()->getRepository(Product::class);
-//        $getProduct = $products->search(array('name' => $resultSearch));
-        $getProduct = $products->findBy(array('name' => $resultSearch));
-        echo '<pre>';
-        var_dump($getProduct);die;
+        $finder = $this->get('fos_elastica.finder.app.product');
+        $query = $request->query->get('search');
+        $resultSearch = $finder->find($query, null, ['search_type' => 'dfs_query_then_fetch']); //?????????? OPTIONS
+
         $repository = $this->getDoctrine()->getRepository(Category::class);
         $categories = $repository->findAll();
 
         return $this->render('search/search.html.twig', [
             'categories' => $categories,
-            'products' => $getProduct
+            'result' => $resultSearch
         ]);
     }
 }

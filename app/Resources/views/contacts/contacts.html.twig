@@ -1,23 +1,45 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div id="wrapper">
-        <div id="container">
-            <div id="welcome">
-                <h1><span>Наши контакты</span>
-                </h1>
+    <div id="obshyi" style="border-color: black; width: 90%; height: 40%;">
+        <div id="maps" style="margin-left: 85px; height: 300px; margin-top: 70px;">
+            <div class="google-map">
+                <iframe
+                        width="600"
+                        height="450"
+                        frameborder="0" style="border:0"
+                        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0Dx_boXQiwvdz8sJHoYeZNVTdoWONYkU
+    &q=Space+Needle,Seattle+WA" allowfullscreen>
+                </iframe>
             </div>
-            <div id="next">
-                {% for get in address %}
-                    <p>{{ get.phone }}</p>
-                    <p>{{ get.address }}</p>
-                {% endfor %}
-
-            </div>
+        </div>
+        <div id="contacts" style="float: right; margin-top: -310px;">
+            {% for get in address %}
+                <h2 style="font-family: 'Rubik', sans-serif;font-size: 3rem;">Наши контакты</h2>
+                <h2 style="font-family: 'Rubik', sans-serif;font-size: 1.5rem; color: #767676;">{{ get.address }}</h2>
+                <h2 style="font-family: 'Rubik', sans-serif;font-size: 1.5rem; color: #767676;">{{ get.phone }}</h2>
+            {% endfor %}
+            <form>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputName">Имя</label>
+                        <input type="text" class="form-control" id="inputName" placeholder="Имя">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPhone">Телефон</label>
+                        <input type="number" class="form-control" id="inputPhone" placeholder="Телефон">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Сообщение</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Отправить</button>
+            </form>
         </div>
     </div>
 {% endblock %}
 
 {% block stylesheets %}
-   
+
 {% endblock %}

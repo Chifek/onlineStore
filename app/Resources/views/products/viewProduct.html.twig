@@ -1,22 +1,50 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div id="wrapper">
-        <div id="container">
-            <div id="next">
-                <h2>{{ product.name }}</h2>
-                <p>
-                    {% if(product.discount == 0) %} Цена: {{ product.price }} {% else %}
-                    Цена: <s> {{ product.price }} </s> <b style="color: red">{{ product.discount }}</b>
-                    {% endif %}
-                    <br> Описание: {{ product.description }}
-                </p>
-
-            </div>
+    <div class="container" style="display: block;
+         min-height: 100px;
+         height: 600px;
+         padding-top: 50px;
+         color: #000000;
+         background-color: white;">
+        <div class="foto" style="float: left;
+         width: 51%;
+         min-height: 100px;
+         height: 500px;
+         padding: 2%;
+         background-color: rgba(243, 156, 18, 0.1);
+         border-radius: 5px;">
+            <figure>
+                <img src="{{ asset('https://demo.opencart.com/image/cache/catalog/demo/macbook_1-200x200.jpg') }}"
+                     width="350px" height="300px" style="display: block;
+          margin: 0 auto; ">
+                <figcaption>Подпись фото</figcaption>
+            </figure>
+        </div>
+        <div class="block" style="float: right;
+        width: 40%;
+        min-height: 100px;
+        height: 500px;
+        background: #7c8ea3;
+        border: 5px solid white;
+        border-bottom-width: 15px;
+        box-shadow: 0 0 8px -1px #f39c12;">
+            hkbghjghjg
         </div>
     </div>
-{% endblock %}
+    <div class="block" style="min-height: 100px;
+         height: 500px;
+         margin: 0 20px;
+         padding: 10px;
+         background-color: rgba(241, 196, 15, 0.1);
+         border-radius: 5px;
+         box-shadow: 0 0 3px #cccccc;">
+        jnjnjknkkkk
+    </div>
 
+
+
+{% endblock %}
 {% block stylesheets %}
-   
+
 {% endblock %}

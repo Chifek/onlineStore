@@ -60,8 +60,12 @@ class Brand extends Controller
         $getProduct = $products->findBy(array('brandId' => $id));
         $repository = $this->getDoctrine()->getRepository(Category::class);
         $categories = $repository->findAll();
+        $brands = $this->getDoctrine()->getRepository(Brands::class);
+        $getBrand = $brands->findBy(array('id' => $id));
+
         return $this->render('brands/viewBrand.html.twig',
             ['products' => $getProduct,
-                'categories' => $categories]);
+                'categories' => $categories,
+                'brand' => $getBrand]);
     }
 }

@@ -10,6 +10,7 @@ use AppBundle\Entity\Category;
 use AppBundle\Entity\Brands;
 use Symfony\Component\HttpFoundation\Response;
 use AppBundle\Entity\Contacts;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class Administrator extends Controller
 {
@@ -179,6 +180,12 @@ class Administrator extends Controller
      */
     public function saveOneProduct(Request $request, $id)
     {
+        $image = $request->files->get('img');
+        if ($image !== null) $imageName = date("Ymdis") . $image->getClientOriginalName();
+
+        if (($image instanceof UploadedFile) && ($image->getError() === 0)) {
+            $image->move($this->getParameter('product_img_directory'), $imageName);
+        }
         $requestAll = $request->request->all();
         $em = $this->getDoctrine()->getManager();
         $product = $em->getRepository(Product::class)->find($id);
@@ -186,6 +193,10 @@ class Administrator extends Controller
         $product->setPrice($requestAll['productPrice']);
         $product->setDiscount($requestAll['productDiscount']);
         $product->setDescription($requestAll['productDescription']);
+        if ($image !== null) {
+            $product->setImage($imageName);
+            $product->setType($image->getClientMimeType());
+        }
         $em->persist($product);
         $em->flush();
 

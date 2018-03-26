@@ -34,8 +34,9 @@ class DefaultController extends Controller
     public function sendData(Request $request)
     {
         $image = $request->files->get('img');
+        if ($image !== null) $imageName = date("Ymdis") . $image->getClientOriginalName();
         if (($image instanceof UploadedFile) && ($image->getError() === 0)) {
-            $image->move($this->getParameter('product_img_directory'), $image->getClientOriginalName());
+            $image->move($this->getParameter('product_img_directory'), $imageName);
         }
         $requestAll = $request->request->all();
         $em = $this->getDoctrine()->getManager();
@@ -43,7 +44,7 @@ class DefaultController extends Controller
         $product->setName($requestAll['title']);
         $product->setPrice($requestAll['price']);
         if ($image !== null) {
-            $product->setImage($image->getClientOriginalName());
+            $product->setImage($imageName);
             $product->setType($image->getClientMimeType());
         }
         if ($requestAll['discount'] === "") {

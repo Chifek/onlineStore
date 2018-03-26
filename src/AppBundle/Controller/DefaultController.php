@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Category;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Product;
 use AppBundle\Entity\ProductCategory;
@@ -32,12 +33,19 @@ class DefaultController extends Controller
      */
     public function sendData(Request $request)
     {
+        $image = $request->files->get('img');
+        if (($image instanceof UploadedFile) && ($image->getError() === 0)) {
+            $image->move($this->getParameter('product_img_directory'), $image->getClientOriginalName());
+        }
         $requestAll = $request->request->all();
-
         $em = $this->getDoctrine()->getManager();
         $product = new Product();
         $product->setName($requestAll['title']);
         $product->setPrice($requestAll['price']);
+        if ($image !== null) {
+            $product->setImage($image->getClientOriginalName());
+            $product->setType($image->getClientMimeType());
+        }
         if ($requestAll['discount'] === "") {
             $product->setDiscount($requestAll['discount'] = 0);
         } else {

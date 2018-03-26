@@ -1,7 +1,9 @@
 <?php
+
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * @ORM\Entity
@@ -41,6 +43,54 @@ class Product
      */
     private $discount;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string
+     */
+    private $image;
+
+    /**
+     * @ORM\Column(type="string", length=30, nullable=true)
+     * @var string
+     */
+    private $type;
+
+    /**
+     * @param $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param $image
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param $name
+     * @return $this
+     */
     public function setName($name)
     {
         $this->name = $name;
@@ -48,11 +98,18 @@ class Product
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
     public function getName()
     {
         return $this->name;
     }
 
+    /**
+     * @param $description
+     * @return $this
+     */
     public function setDescription($description)
     {
         $this->description = $description;
@@ -60,11 +117,18 @@ class Product
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
     public function getDescription()
     {
         return $this->description;
     }
 
+    /**
+     * @param $price
+     * @return $this
+     */
     public function setPrice($price)
     {
         $this->price = $price;
@@ -72,16 +136,26 @@ class Product
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
     public function getPrice()
     {
         return $this->price;
     }
 
+    /**
+     * @return mixed
+     */
     public function getId()
     {
         return $this->id;
     }
 
+    /**
+     * @param $brandId
+     * @return $this
+     */
     public function setBrand($brandId)
     {
         $this->brandId = $brandId;
@@ -89,11 +163,18 @@ class Product
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
     public function getBrand()
     {
         return $this->brandId;
     }
 
+    /**
+     * @param $discount
+     * @return $this
+     */
     public function setDiscount($discount)
     {
         $this->discount = $discount;
@@ -101,6 +182,9 @@ class Product
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
     public function getDiscount()
     {
         return $this->discount;

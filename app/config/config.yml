@@ -7,6 +7,8 @@ imports:
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
+    app.path.product_images: /uploads/images/products
+    product_img_directory: '%kernel.root_dir%/../web/products/img/'
 
 framework:
     #esi: ~
@@ -37,6 +39,8 @@ framework:
 twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
+    globals:
+      img_path: '%product_img_directory%'
 
 # Doctrine Configuration
 doctrine:
@@ -96,8 +100,11 @@ fos_elastica:
 
 vich_uploader:
     db_driver: orm
-
     mappings:
             product_image:
-                uri_prefix: /images/products
+                uri_prefix: '%app.path.product_images%'
                 upload_destination: '%kernel.project_dir%/public/images/products'
+
+                inject_on_load: false
+                delete_on_update: true
+                delete_on_remove: true

@@ -11,7 +11,7 @@
             <div id="next">
                 <h2>Добавить новый товар: </h2>
                 <p>
-                    <form action="{{ path('senddata') }}" method="post">
+                    <form action="{{ path('senddata') }}" method="post" enctype="multipart/form-data">
                         <label for="title_id">Наименование: </label>
                         <input type="text" name="title" id="title_id" required> <br>
 
@@ -24,22 +24,24 @@
                         Выберите категории:
 
                         {% for item in categories %}
-                <p>
-                    <input type="checkbox" name="category[]" value="{{ item.id }}">{{ item.name }}
-                </p>
-                {% endfor %}
+                            <p>
+                                <input type="checkbox" name="category[]" value="{{ item.id }}">{{ item.name }}
+                            </p>
+                        {% endfor %}
 
-                <label for="brandId">Выберите бренд: </label>
-                <select name="brandId" id="brandId">
-                    {% for item in brands %}
-                        <option value="{{ item.id }}">{{ item.name }}</option>
-                    {% endfor %}
-                </select> <br>
-                <label for="discount">Цена со скидкой: </label>
-                <input type="number" name="discount" id="discount"> <br>
+                        <label for="brandId">Выберите бренд: </label>
+                        <select name="brandId" id="brandId">
+                            {% for item in brands %}
+                                <option value="{{ item.id }}">{{ item.name }}</option>
+                            {% endfor %}
+                        </select> <br>
 
-                <input type="submit" value="Сохранить">
-                </form>
+                        <label for="discount">Цена со скидкой: </label>
+                        <input type="number" name="discount" id="discount"> <br>
+
+                        <input type="file" name="img">
+                        <button class="btn-done" type="submit">Send</button>
+                    </form>
                 </p>
             </div>
         </div>

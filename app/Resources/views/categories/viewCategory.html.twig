@@ -18,9 +18,15 @@
                                         padding-right: 15px; padding-left: 15px;">
                                         <div style="border: 1px solid #ddddff; margin-bottom: 20px; overflow: auto; box-sizing: border-box;">
                                             <div style="text-align: center">
-                                                <a href="https://demo.opencart.com/index.php?route=product/product&amp;product_id=43">
-                                                    <img src="https://demo.opencart.com/image/cache/catalog/demo/macbook_1-200x200.jpg"
-                                                         alt="MacBook" title="MacBook" style="vertical-align: middle;"/></a>
+                                                {% if value.image is empty %}
+                                                    <a href="{{ path('view-product', {'id': value.id}) }}">
+                                                        <img src="{{ asset('defaultImg/noImage.png') }}"
+                                                             alt="{{ value.name }}" title="{{ value.name }}" style="vertical-align: middle;"/></a>
+                                                {% else %}
+                                                    <a href="{{ path('view-product', {'id': value.id}) }}">
+                                                        <img src="{{ asset('products/img/') }}{{ value.image }}"
+                                                             alt="{{ value.name }}" title="{{ value.name }}" style="vertical-align: middle;"/></a>
+                                                {% endif %}
                                             </div>
                                             <div style="padding: 0 20px; min-height: 180px">
                                                 <h4>

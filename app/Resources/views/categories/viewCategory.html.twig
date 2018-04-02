@@ -1,68 +1,70 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div id="wrapper">
-        <div id="container">
-            <div style="margin-top: 40px;margin-right: 5px; margin-left: 20px">
-                <h3 style="font-size: 21px;color: #0088CC;">
-                    <span>{{ category.name }}: </span>
-                </h3>
-            </div>
-            <div id="next">
-                <div style="margin-right: 5px; margin-left: 5px;">
-                    <div style="min-height: 600px;">
-                        {% if products|length > 0 %}
-                            {% for key, items in products %}
-                                {% for value in items %}
-                                    <div style="width: 25%; float: left; position: relative; min-height: 1px;
-                                        padding-right: 15px; padding-left: 15px;">
-                                        <div style="border: 1px solid #ddddff; margin-bottom: 20px; overflow: auto; box-sizing: border-box; height: 100%">
-                                            <div style="text-align: center;
-                                            width: 100%;
-                                            height: 100%;
-                                            overflow: hidden;">
-                                                {% if value.image is empty %}
-                                                    <a href="{{ path('view-product', {'id': value.id}) }}">
-                                                        <img src="{{ asset('defaultImg/noImage.png') }}"
-                                                             alt="{{ value.name }}" title="{{ value.name }}" style="vertical-align: middle;"/></a>
-                                                {% else %}
-                                                    <a href="{{ path('view-product', {'id': value.id}) }}">
-                                                        <img src="{{ asset('products/img/') }}{{ value.image }}"
-                                                             alt="{{ value.name }}" title="{{ value.name }}" style="vertical-align: middle;"/></a>
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h1 class="jumbotron-heading">Все товары категории {{ category.name }}</h1>
+            <p class="lead text-muted">Тут вы сможете найти абсолютно все товары категории {{ category.name }}. Так же
+                вы можете получить грандиозную скидку купив всего лишь контрольный пакет акций этого же магазина)</p>
+            <p class="lead text-muted">
+                Так же вы можете посмотреть товары по брендам, нажав кнопку:
+            </p>
+            <p>
+                <a href="{{ path('brands') }}" class="btn btn-primary my-2">Все бренды</a>
+            </p>
+        </div>
+    </section>
+
+    <div class="album py-5 bg-light">
+        <div class="container">
+
+            <div class="row">
+                {% if products|length > 0 %}
+                    {% for key, items in products %}
+                        {% for value in items %}
+                            <div class="col-md-4">
+                                <div class="card mb-4 box-shadow">
+                                    {% if value.image is empty %}
+                                        <a href="{{ path('view-product', {'id': value.id}) }}">
+                                            <img class="card-img-top" src="{{ asset('defaultImg/noImage.png') }}"
+                                                 alt="Card image cap">
+                                        </a>
+                                    {% else %}
+                                        <a href="{{ path('view-product', {'id': value.id}) }}">
+                                            <img class="card-img-top"
+                                                 src="{{ asset('products/img/') }}{{ value.image }}"
+                                                 alt="Card image cap">
+                                        </a>
+                                    {% endif %}
+                                    <div class="card-body">
+                                        <p style="text-align: center; color: blue; font-size: large;">{{ value.name }}</p>
+                                        <p class="card-text">{{ value.description |slice(0,50) }}...</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="btn-group">
+                                                <a href="{{ path('view-product', {'id': value.id}) }}" type="button"
+                                                   class="btn btn-sm btn-outline-primary">Посмотреть</a>
+                                                {% if(value.discount != 0) %}
+                                                    <a href="{{ path('view-product', {'id': value.id}) }}" type="button"
+                                                       class="btn btn-sm btn-danger">Скидка</a>
                                                 {% endif %}
                                             </div>
-                                            <div style="padding: 0 20px; min-height: 180px">
-                                                <h4>
-                                                    <a href="{{ path('view-product', {'id': value.id}) }}">{{ value.name }}</a>
-                                                </h4>
-                                                <p>{{ value.description |slice(0,150) }}</p>
-                                                <p style="color: black; margin: 0 0 10px;">
-                                                    {% if(value.discount == 0) %}
-                                                        <span style="font-weight: 600;">{{ value.price }} сомов</span>
-                                                    {% else %}
-                                                        <span style="font-weight: 600;color: red;">{{ value.discount }}
-                                                            сомов</span>
-                                                        <span style="color: #999; text-decoration: line-through; margin-left: 10px;">{{ value.price }}
-                                                            сомов</span>
-                                                    {% endif %}
-                                                </p>
-                                            </div>
-                                            <div style="border-top: 1px solid #ddd; background-color: #eee; overflow: auto;">
-                                                <button style="width: 100%; border: none; display: inline-block; float: left; background-color: #eee; color: #444;
-                                            line-height: 38px; font-weight: bold; text-align: center; text-transform: uppercase;">
-                                                    <i class="fa fa-shopping-cart"></i>
-                                                    <span>Заказать</span>
-                                                </button>
-                                            </div>
+                                            {% if(value.discount == 0) %}
+                                                <big class="text-muted">{{ value.price }} сомов</big>
+                                            {% else %}
+                                                <small class="text-muted"
+                                                       style="text-decoration: line-through;">{{ value.price }}</small>
+                                                <big class="text-muted">{{ value.discount }} сомов</big>
+                                            {% endif %}
                                         </div>
                                     </div>
-                                {% endfor %}
-                            {% endfor %}
-                        {% else %}
-                            <p>На данный момент товаров нет</p>
-                        {% endif %}
-                    </div>
-                </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                {% else %}
+                    <p style="text-align: center; color: blue; font-size: large;">К сожалению на данный момент товаров в
+                        категории {{ category.name }} нет</p>
+                {% endif %}
             </div>
         </div>
     </div>

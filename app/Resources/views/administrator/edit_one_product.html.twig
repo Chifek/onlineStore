@@ -12,7 +12,8 @@
             </div>
             <div id="next">
                 <h2>Редактор товаров</h2>
-                <form action="{{ path('admin-save-product', {'id': product.id}) }}" method="post" enctype="multipart/form-data">
+                <form action="{{ path('admin-save-product', {'id': product.id}) }}" method="post"
+                      enctype="multipart/form-data">
                     <label for="productName">Наименование товара: </label>
                     <input type="text" value="{{ product.name }}" id="productName" name="productName">
                     <br>
@@ -31,19 +32,43 @@
                 <hr>
                 <div id="next">
                     <h2>Предпросмотр: </h2>
-                    <h3>{{ product.name }}</h3>
-                    <p>
-                        {% if(product.discount == 0) %} Цена: {{ product.price }} {% else %}
-                            Цена: <s> {{ product.price }} </s> <b style="color: red">{{ product.discount }}</b>
-                        {% endif %}
-                            <br> Описание: {{ product.description }}
-                            <br>
-                        {% if product.image is empty %}
-                            <img src="{{ asset('defaultImg/noImage.png') }}"/>
-                        {% else %}
-                            <img src="{{ asset('products/img/') }}{{ product.image }}"/>
-                        {% endif %}
-                    </p>
+
+                    <div class="col-md-4">
+                        <div class="card mb-4 box-shadow">
+                            {% if product.image is empty %}
+                                <a href="#">
+                                    <img class="card-img-top" src="{{ asset('defaultImg/noImage.png') }}"
+                                         alt="Card image cap">
+                                </a>
+                            {% else %}
+                                <a href="#">
+                                    <img class="card-img-top" src="{{ asset('products/img/') }}{{ product.image }}"
+                                         alt="Card image cap">
+                                </a>
+                            {% endif %}
+                            <div class="card-body">
+                                <p style="text-align: center; color: blue; font-size: large;">{{ product.name }}</p>
+                                <p class="card-text">{{ product.description |slice(0,50) }}...</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <a href="#" type="button"
+                                           class="btn btn-sm btn-outline-primary">Посмотреть</a>
+                                        {% if(product.discount != 0) %}
+                                            <a href="#" type="button"
+                                               class="btn btn-sm btn-danger">Скидка</a>
+                                        {% endif %}
+                                    </div>
+                                    {% if(product.discount == 0) %}
+                                        <big class="text-muted">{{ product.price }} сомов</big>
+                                    {% else %}
+                                        <small class="text-muted"
+                                               style="text-decoration: line-through;">{{ product.price }}</small>
+                                        <big class="text-muted">{{ product.discount }} сомов</big>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,32 +1,35 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div id="wrapper">
-        <div id="container">
-            <div id="welcome">
-                <h1><span>Добро пожаловать в </span> админ.панель
-                </h1>
-                <p>
-                    <a href="{{ path('adminMainPage') }}">Перейти на главную админ.панели</a>
-                </p>
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+        <h2>Редактор категорий/товаров</h2>
+        <p>
+            {% for get in address %}
+        <form action="{{ path('saveContacts') }}" method="post">
+            <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Номер телефона:</span>
+                </div>
+                <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+                       value="{{ get.phone }}" name="phone">
             </div>
-            <div id="next">
-                <h2>Редактор категорий/товаров</h2>
-                <p>
-                {% for get in address %}
-                <form action="{{ path('saveContacts') }}" method="post">
-                    <label id="phone">Номер телефона: </label>
-                    <input type="text" id="phone" value="{{ get.phone }}" name="phone"> <br>
-                    <input type="text" id="id" name="id" hidden value="1">
-                    <label id="address">Адрес: </label>
-                    <input type="text" id="address" value="{{ get.address }}" name="address">
-                    <input type="submit" value="Сохранить">
-                </form>
-                {% endfor %}
-                </p>
+            <input type="text" id="id" name="id" hidden value="1">
+
+            <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Адрес:</span>
+                </div>
+                <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+                       value="{{ get.address }}" name="address">
             </div>
-        </div>
-    </div>
+            <input type="submit" value="Сохранить" class="btn btn-success">
+        </form>
+        {% endfor %}
+        </p>
+        <p>
+            <a href="{{ path('adminMainPage') }}" class="btn btn-secondary">На главную</a>
+        </p>
+    </main>
 {% endblock %}
 
 {% block stylesheets %}

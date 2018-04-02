@@ -29,7 +29,8 @@
                                 </a>
                             {% else %}
                                 <a href="{{ path('view-product', {'id': item.id}) }}">
-                                    <img class="card-img-top" src="products/img/{{ item.image }}" alt="Card image cap">
+                                    <img class="card-img-top" src="{{ asset('products/img/') }}{{ item.image }}"
+                                         alt="Card image cap">
                                 </a>
                             {% endif %}
                             <div class="card-body">

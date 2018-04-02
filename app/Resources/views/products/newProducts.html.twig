@@ -1,51 +1,53 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div id="wrapper">
-        <div id="container">
-            <div id="welcome">
-                <h1><span>Добро пожаловать в </span> админ.панель
-                </h1>
-                <a href="{{ path('adminMainPage') }}">На главную админ.панели</a>
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+        <h2>Редактор категорий/товаров</h2>
+        <p>
+            <form action="{{ path('senddata') }}" method="post" enctype="multipart/form-data">
+                <label for="title_id">Наименование: </label>
+                <input type="text" name="title" id="title_id" required> <br>
+
+                <label for="price_id">Цена: </label>
+                <input type="number" name="price" id="price_id" required> <br>
+
+                <label for="description_id">Подробное описание: </label> <br>
+                <textarea id="description_id" name="description" required autofocus minlength="150"></textarea>
+                <br>
+                Выберите категории:
+
+                {% for item in categories %}
+        <p>
+            <input type="checkbox" name="category[]" value="{{ item.id }}">{{ item.name }}
+        </p>
+        {% endfor %}
+
+        <label for="brandId">Выберите бренд: </label>
+        <select name="brandId" id="brandId">
+            {% for item in brands %}
+                <option value="{{ item.id }}">{{ item.name }}</option>
+            {% endfor %}
+        </select> <br>
+
+        <label for="discount">Цена со скидкой: </label>
+        <input type="number" name="discount" id="discount"> <br>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Загрузить</span>
             </div>
-            <div id="next">
-                <h2>Добавить новый товар: </h2>
-                <p>
-                    <form action="{{ path('senddata') }}" method="post" enctype="multipart/form-data">
-                        <label for="title_id">Наименование: </label>
-                        <input type="text" name="title" id="title_id" required> <br>
-
-                        <label for="price_id">Цена: </label>
-                        <input type="number" name="price" id="price_id" required> <br>
-
-                        <label for="description_id">Подробное описание: </label> <br>
-                        <textarea id="description_id" name="description" required autofocus minlength="150"></textarea>
-                        <br>
-                        Выберите категории:
-
-                        {% for item in categories %}
-                            <p>
-                                <input type="checkbox" name="category[]" value="{{ item.id }}">{{ item.name }}
-                            </p>
-                        {% endfor %}
-
-                        <label for="brandId">Выберите бренд: </label>
-                        <select name="brandId" id="brandId">
-                            {% for item in brands %}
-                                <option value="{{ item.id }}">{{ item.name }}</option>
-                            {% endfor %}
-                        </select> <br>
-
-                        <label for="discount">Цена со скидкой: </label>
-                        <input type="number" name="discount" id="discount"> <br>
-
-                        <input type="file" name="img">
-                        <button class="btn-done" type="submit">Send</button>
-                    </form>
-                </p>
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="inputGroupFile01" name="img">
+                <label class="custom-file-label" for="inputGroupFile01">Выберите картинку</label>
             </div>
         </div>
-    </div>
+        <button class="btn btn-success" type="submit">Сохранить</button>
+        </form>
+        </p>
+        <p>
+            <a href="{{ path('adminMainPage') }}" class="btn btn-secondary">На главную</a>
+        </p>
+    </main>
 {% endblock %}
 
 {% block stylesheets %}

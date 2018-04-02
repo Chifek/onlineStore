@@ -1,20 +1,41 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div id="wrapper">
-        <div id="container">
-            <div id="welcome">
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h1 class="jumbotron-heading">Все бренды</h1>
+            <p class="lead text-muted">Тут вы сможете найти абсолютно все бренды этого замечательного магазина. Так же
+                вы можете получить грандиозную скидку купив всего лишь контрольный пакет акций этого же магазина)</p>
+            <p class="lead text-muted">
+                Так же вы можете посмотреть все товары, нажав кнопку:
+            </p>
+            <p>
+                <a href="{{ path('products') }}" class="btn btn-primary my-2">Все товары</a>
+            </p>
+        </div>
+    </section>
 
-                <h1><span>Все бренды: </span>
-                </h1>
-            </div>
-            <div id="next">
+    <div class="album py-5 bg-light">
+        <div class="container">
+
+            <div class="row">
                 {% for item in brands %}
-                    <p>
-                        <a href="{{ path('view-brand', {'id': item.id}) }}">{{ item.name }}</a>
-                    </p>
+                    <div class="col-md-4">
+                        <div class="card mb-4 box-shadow">
+                            <div class="card-body">
+                                <p style="text-align: center; color: blue; font-size: large;">{{ item.name }}</p>
+                                <p class="card-text">Кликнув кнопку посмотреть, вы сможете найти все
+                                    товары {{ item.name }}</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <a href="{{ path('view-brand', {'id': item.id}) }}" type="button"
+                                           class="btn btn-sm btn-outline-primary">Посмотреть</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 {% endfor %}
-
             </div>
         </div>
     </div>

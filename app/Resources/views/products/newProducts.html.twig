@@ -4,44 +4,59 @@
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
         <h2>Редактор категорий/товаров</h2>
         <p>
-            <form action="{{ path('senddata') }}" method="post" enctype="multipart/form-data">
-                <label for="title_id">Наименование: </label>
-                <input type="text" name="title" id="title_id" required> <br>
+        <form action="{{ path('senddata') }}" method="post" enctype="multipart/form-data">
+            <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Наименование:</span>
+                </div>
+                <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+                       name="title" required>
+            </div>
+            <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Цена:</span>
+                </div>
+                <input type="number" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+                       name="price" required>
+            </div>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Подробное описание:</span>
+                </div>
+                <textarea class="form-control" aria-label="With textarea" name="description" required></textarea>
+            </div>
+            Выберите категории:
 
-                <label for="price_id">Цена: </label>
-                <input type="number" name="price" id="price_id" required> <br>
-
-                <label for="description_id">Подробное описание: </label> <br>
-                <textarea id="description_id" name="description" required autofocus minlength="150"></textarea>
-                <br>
-                Выберите категории:
-
-                {% for item in categories %}
-        <p>
-            <input type="checkbox" name="category[]" value="{{ item.id }}">{{ item.name }}
-        </p>
-        {% endfor %}
-
-        <label for="brandId">Выберите бренд: </label>
-        <select name="brandId" id="brandId">
-            {% for item in brands %}
-                <option value="{{ item.id }}">{{ item.name }}</option>
+            {% for item in categories %}
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="{{ item.id }}" name="category[]"
+                           value="{{ item.id }}">
+                    <label class="custom-control-label" for="{{ item.id }}">{{ item.name }}</label>
+                </div>
             {% endfor %}
-        </select> <br>
 
-        <label for="discount">Цена со скидкой: </label>
-        <input type="number" name="discount" id="discount"> <br>
-
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text">Загрузить</span>
+            <select class="custom-select"  name="brandId">
+                {% for item in brands %}
+                    <option value="{{ item.id }}">{{ item.name }}</option>
+                {% endfor %}
+            </select>
+            <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Цена со скидкой:</span>
+                </div>
+                <input type="number" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+                       name="discount">
             </div>
-            <div class="custom-file">
-                <input type="file" class="custom-file-input" id="inputGroupFile01" name="img">
-                <label class="custom-file-label" for="inputGroupFile01">Выберите картинку</label>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Загрузить</span>
+                </div>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="inputGroupFile01" name="img">
+                    <label class="custom-file-label" for="inputGroupFile01">Выберите картинку</label>
+                </div>
             </div>
-        </div>
-        <button class="btn btn-success" type="submit">Сохранить</button>
+            <button class="btn btn-success" type="submit">Сохранить</button>
         </form>
         </p>
         <p>

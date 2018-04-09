@@ -1,50 +1,80 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="container" style="display: block;
-         min-height: 100px;
-         height: 600px;
-         padding-top: 50px;
-         color: #000000;
-         background-color: white;">
-        <div class="foto" style="float: left;
-         width: 51%;
-         min-height: 100px;
-         height: 500px;
-         padding: 2%;
-         background-color: rgba(243, 156, 18, 0.1);
-         border-radius: 5px;">
-            <figure>
-                <img src="{{ asset('https://demo.opencart.com/image/cache/catalog/demo/macbook_1-200x200.jpg') }}"
-                     width="350px" height="300px" style="display: block;
-          margin: 0 auto; ">
-                <figcaption>Подпись фото</figcaption>
-            </figure>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                {% if product.image is empty %}
+                    <img src="{{ asset('defaultImg/noImage.png') }}"
+                         alt="Kodak Brownie Flash B Camera" class="image-responsive"/>
+                {% else %}
+                    <img src="{{ asset('products/img/') }}{{ product.image }}"
+                         alt="Kodak Brownie Flash B Camera" class="image-responsive"/>
+                {% endif %}
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1>{{ product.name }}</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <span class="monospaced">No. 1960140180</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 bottom-rule">
+                        {% if(product.discount != 0) %}
+                            <h2 class="product-price"><s
+                                        style="color: red">{{ product.price }}</s> {{ product.discount }}с.</h2>
+                        {% else %}
+                            <h2 class="product-price">{{ product.price }} с.</h2>
+                        {% endif %}
+                    </div>
+                </div><!-- end row -->
+                <div class="row">
+                    <div class="col-md-12 bottom-rule top-10"></div>
+                </div><!-- end row -->
+
+                <div class="row">
+                    <div class="col-md-12 top-10">
+                        <p>Для заказа по телефону, <a href="tel:996709552727">звоните +996(709)55-27-27</a></p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="block" style="float: right;
-        width: 40%;
-        min-height: 100px;
-        height: 500px;
-        background: #7c8ea3;
-        border: 5px solid white;
-        border-bottom-width: 15px;
-        box-shadow: 0 0 8px -1px #f39c12;">
-            hkbghjghjg
+        <div class="row">
+            <div class="col-md-12">
+                <p class="description">
+                </p>
+            </div>
+        </div>
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active">
+                <a href="#description"
+                   aria-controls="description"
+                   role="tab"
+                   data-toggle="tab"
+                >Описание</a>
+            </li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="description">
+                <p class="top-10">
+                    {{ product.description }}
+                </p>
+                <p>
+                    <small>
+                        p.s. для получения подробной информации свяжитесь с <a href="{{ path('contacts') }}"> менеджером</a>
+                    </small>
+                </p>
+            </div>
         </div>
     </div>
-    <div class="block" style="min-height: 100px;
-         height: 500px;
-         margin: 0 20px;
-         padding: 10px;
-         background-color: rgba(241, 196, 15, 0.1);
-         border-radius: 5px;
-         box-shadow: 0 0 3px #cccccc;">
-        jnjnjknkkkk
-    </div>
-
-
-
 {% endblock %}
-{% block stylesheets %}
+    {% block stylesheets %}
 
-{% endblock %}
+    {% endblock %}

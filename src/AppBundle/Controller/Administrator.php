@@ -202,7 +202,6 @@ class Administrator extends Controller
         } else {
             $product->setDiscount($requestAll['productDiscount']);
         }
-//        $product->setDiscount($requestAll['productDiscount']);
         $product->setDescription($requestAll['productDescription']);
         if ($image !== null) {
             $product->setImage($imageName);

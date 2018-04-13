@@ -11,6 +11,7 @@ use AppBundle\Entity\Brands;
 use Symfony\Component\HttpFoundation\Response;
 use AppBundle\Entity\Contacts;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use AppBundle\Entity\ProductCategory;
 
 class Administrator extends Controller
 {
@@ -169,9 +170,12 @@ class Administrator extends Controller
     {
         $repository = $this->getDoctrine()->getRepository(Product::class);
         $products = $repository->find($id);
-        $repository = $this->getDoctrine()->getRepository(Category::class);
-        $categories = $repository->findAll();
-        return $this->render('administrator/edit_one_product.html.twig', ['product' => $products, 'categories' => $categories]);
+        $repository2 = $this->getDoctrine()->getRepository(Category::class);
+        $categories = $repository2->findAll();
+        $repository3 = $this->getDoctrine()->getRepository(ProductCategory::class);
+        $prodCategories = $repository3->findBy(array('productId' => $id));
+
+        return $this->render('administrator/edit_one_product.html.twig', ['product' => $products, 'categories' => $categories, 'prodCategories' => $prodCategories]);
     }
 
 
@@ -187,11 +191,18 @@ class Administrator extends Controller
             $image->move($this->getParameter('product_img_directory'), $imageName);
         }
         $requestAll = $request->request->all();
+
         $em = $this->getDoctrine()->getManager();
         $product = $em->getRepository(Product::class)->find($id);
         $product->setName($requestAll['productName']);
         $product->setPrice($requestAll['productPrice']);
-        $product->setDiscount($requestAll['productDiscount']);
+
+        if ($requestAll['productDiscount'] === "") {
+            $product->setDiscount($requestAll['productDiscount'] = 0);
+        } else {
+            $product->setDiscount($requestAll['productDiscount']);
+        }
+//        $product->setDiscount($requestAll['productDiscount']);
         $product->setDescription($requestAll['productDescription']);
         if ($image !== null) {
             $product->setImage($imageName);
@@ -199,7 +210,16 @@ class Administrator extends Controller
         }
         $em->persist($product);
         $em->flush();
-
+        if (isset($requestAll['category']) === true) {
+            for ($i = 0; $i < count($requestAll['category']); $i++) {
+                $em = $this->getDoctrine()->getManager();
+                $productCategory = new ProductCategory();
+                $productCategory->setCategoryId($requestAll['category'][$i]);
+                $productCategory->setProductId($product->getId());
+                $em->persist($productCategory);
+                $em->flush();
+            }
+        }
         return $this->redirectToRoute('productsLists');
     }
 }

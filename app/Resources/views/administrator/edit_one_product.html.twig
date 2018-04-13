@@ -26,6 +26,14 @@
                     <label for="productDescription">Описание товара: </label>
                     <textarea id="productDescription" name="productDescription">{{ product.description }}</textarea>
                     <br>
+                    {% for item in categories %}
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="{{ item.id }}" name="category[]"
+                                   value="{{ item.id }}">
+                            <label class="custom-control-label" for="{{ item.id }}">{{ item.name }}</label>
+                        </div>
+                    {% endfor %}
+                    <br>
                     <input type="file" name="img">
                     <button class="btn-done" type="submit">Send</button>
                 </form>
@@ -58,6 +66,7 @@
                                                class="btn btn-sm btn-danger">Скидка</a>
                                         {% endif %}
                                     </div>
+
                                     {% if(product.discount == 0) %}
                                         <big class="text-muted">{{ product.price }} сомов</big>
                                     {% else %}

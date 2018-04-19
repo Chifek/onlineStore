@@ -221,4 +221,46 @@ class Administrator extends Controller
         }
         return $this->redirectToRoute('productsLists');
     }
+
+    /**
+     * @Route ("/admin/stockList", name = "stockList")
+     */
+    function stockList()
+    {
+        $repository = $this->getDoctrine()->getRepository(Category::class);
+        $categories = $repository->findAll();
+
+
+        return $this->render('administrator/stock.html.twig', ['categories' => $categories]);
+    }
+
+    /**
+     * @Route ("/admin/saveStock", name = "saveStock")
+     */
+    function saveStock(Request $request)
+    {
+        $requestAll = $request->request->all();
+        $percent = $requestAll['discount'];
+        $category = $requestAll['categoryId'];
+        $repository = $this->getDoctrine()->getRepository(ProductCategory::class);
+        $address = $repository->findBy(array('categoryId' => $category));
+        for ($i = 0; $i < count($address); $i++) {
+            $productId = $address[$i]->getProductId();
+            $rep = $this->getDoctrine()->getRepository(Product::class);
+            $res[] = $rep->find($productId);
+        }
+
+        for ($r = 0; $r < count($res); $r++) {
+            $price = $res[$r]->getPrice();
+            $prodID = $res[$r]->getId();
+            $discountPrice = intval($price / 100 * $percent);
+            $total = (int)$price - $discountPrice;
+            $em = $this->getDoctrine()->getManager();
+            $product = $em->getRepository(Product::class)->find($prodID);
+            $product->setDiscount($total);
+            $em->persist($product);
+            $em->flush();
+        }
+        return $this->redirectToRoute('stockList');
+    }
 }

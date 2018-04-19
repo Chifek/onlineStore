@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+        <h2>Редактор акций на категории</h2>
+        <p>
+        <form action="{{ path('saveStock') }}" method="post" enctype="multipart/form-data">
+            Выберите категории:
+
+            {#{% for item in categories %}#}
+                {#<div class="custom-control custom-checkbox">#}
+                    {#<input type="checkbox" class="custom-control-input" id="{{ item.id }}" name="category[]"#}
+                           {#value="{{ item.id }}">#}
+                    {#<label class="custom-control-label" for="{{ item.id }}">{{ item.name }}</label>#}
+                {#</div>#}
+            {#{% endfor %}#}
+            <select class="custom-select"  name="categoryId">
+                {% for item in categories %}
+                    <option value="{{ item.id }}">{{ item.name }}</option>
+                {% endfor %}
+            </select>
+            <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Цена со скидкой:</span>
+                </div>
+                <input type="number" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+                       name="discount">
+            </div>
+            <button class="btn btn-success" type="submit">Сохранить</button>
+        </form>
+        </p>
+        <p>
+            <a href="{{ path('adminMainPage') }}" class="btn btn-secondary">На главную</a>
+        </p>
+    </main>
+{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}

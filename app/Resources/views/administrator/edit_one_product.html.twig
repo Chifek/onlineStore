@@ -29,7 +29,7 @@
                     {% for item in categories %}
                         <div class="custom-control custom-checkbox">
                             <input type="checkbox" class="custom-control-input" id="{{ item.id }}" name="category[]"
-                                   value="{{ item.id }}">
+                                   value="{{ item.id }}" disabled>
                             <label class="custom-control-label" for="{{ item.id }}">{{ item.name }}</label>
                         </div>
                     {% endfor %}

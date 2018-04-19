@@ -78,9 +78,15 @@
                     </h6>
                     <ul class="nav flex-column mb-2">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path('stockList') }}">
+                            <a class="nav-link" href="{{ path('stockListCat') }}">
                                 <span data-feather="file-text"></span>
                                 Акции по категориям
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('stockListBrand') }}">
+                                <span data-feather="file-text"></span>
+                                Акции по брендам
                             </a>
                         </li>
                         <a class="btn btn-info" href="{{ asset('/logout') }}" type="button" >Выйти</a>

@@ -223,7 +223,7 @@ class Administrator extends Controller
     }
 
     /**
-     * @Route ("/admin/stockList", name = "stockList")
+     * @Route ("/admin/stockListCat", name = "stockListCat")
      */
     function stockList()
     {
@@ -235,7 +235,7 @@ class Administrator extends Controller
     }
 
     /**
-     * @Route ("/admin/saveStock", name = "saveStock")
+     * @Route ("/admin/saveStockCat", name = "saveStockCat")
      */
     function saveStock(Request $request)
     {
@@ -261,6 +261,45 @@ class Administrator extends Controller
             $em->persist($product);
             $em->flush();
         }
-        return $this->redirectToRoute('stockList');
+        return $this->redirectToRoute('stockListCat');
+    }
+
+    /**
+     * @Route ("/admin/stockListBrand", name = "stockListBrand")
+     */
+    function stockListBrand()
+    {
+        $repository = $this->getDoctrine()->getRepository(Category::class);
+        $categories = $repository->findAll();
+        $repositoryBrands = $this->getDoctrine()->getRepository((Brands::class));
+        $brands = $repositoryBrands->findAll();
+
+
+        return $this->render('administrator/stockBrand.html.twig', ['categories' => $categories, 'brands' => $brands]);
+    }
+
+    /**
+     * @Route ("/admin/saveStockBrand", name = "saveStockBrand")
+     */
+    function saveStockBrand(Request $request)
+    {
+        $requestAll = $request->request->all();
+        $percent = $requestAll['discount'];
+        $brandId = $requestAll['brandId'];
+        $repository = $this->getDoctrine()->getRepository(Product::class);
+        $address = $repository->findBy(array('brandId' => $brandId));
+
+        for ($r = 0; $r < count($address); $r++) {
+            $price = $address[$r]->getPrice();
+            $prodID = $address[$r]->getId();
+            $discountPrice = intval($price / 100 * $percent);
+            $total = (int)$price - $discountPrice;
+            $em = $this->getDoctrine()->getManager();
+            $product = $em->getRepository(Product::class)->find($prodID);
+            $product->setDiscount($total);
+            $em->persist($product);
+            $em->flush();
+        }
+        return $this->redirectToRoute('stockListCat');
     }
 }

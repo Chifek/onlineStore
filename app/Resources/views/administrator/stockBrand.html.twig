@@ -2,12 +2,12 @@
 
 {% block body %}
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-        <h2>Редактор акций на категории</h2>
+        <h2>Редактор акций по брендам</h2>
         <p>
-        <form action="{{ path('saveStockCat') }}" method="post" enctype="multipart/form-data">
+        <form action="{{ path('saveStockBrand') }}" method="post" enctype="multipart/form-data">
             Выберите категории:
-            <select class="custom-select"  name="categoryId">
-                {% for item in categories %}
+            <select class="custom-select"  name="brandId">
+                {% for item in brands %}
                     <option value="{{ item.id }}">{{ item.name }}</option>
                 {% endfor %}
             </select>

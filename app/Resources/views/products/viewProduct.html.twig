@@ -6,10 +6,10 @@
             <div class="col-md-6">
                 {% if product.image is empty %}
                     <img src="{{ asset('defaultImg/noImage.png') }}"
-                         alt="Kodak Brownie Flash B Camera" class="image-responsive"/>
+                         class="img-fluid" alt="Responsive image"/>
                 {% else %}
                     <img src="{{ asset('products/img/') }}{{ product.image }}"
-                         alt="Kodak Brownie Flash B Camera" class="image-responsive"/>
+                         class="img-fluid" alt="Responsive image"/>
                 {% endif %}
             </div>
             <div class="col-md-6">

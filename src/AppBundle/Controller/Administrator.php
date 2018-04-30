@@ -300,6 +300,6 @@ class Administrator extends Controller
             $em->persist($product);
             $em->flush();
         }
-        return $this->redirectToRoute('stockListCat');
+        return $this->redirectToRoute('stockListBrand');
     }
 }

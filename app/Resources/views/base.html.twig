@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css"
           integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
     <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    <link href="{{ asset('css/main.css') }}" rel="stylesheet" type="text/css">
+    <script defer src="{{ asset('js/main.js') }}"></script>
 </head>
 <body>
 {% include '::header.html.twig' with {categories: categories} %}
@@ -24,6 +26,8 @@
         integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4"
         crossorigin="anonymous"></script>
 <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-{% block javascripts %}{% endblock %}
+{% block javascripts %}
+    <script defer src="{{ asset('js/main.js') }}"></script>
+{% endblock %}
 </body>
 </html>

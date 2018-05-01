@@ -5,6 +5,15 @@ We believe that if we give our Customers what they are looking for at a great pr
 honoring us by comming back to see what else we have to offer ! OnlineStore always puts our Customers 
 first-and always will !
 
+Requirements
+--------------
+
+* PHP
+* PostgreSQL
+* Elasticsearch
+* Composer
+
+
 How to install?
 --------------
 

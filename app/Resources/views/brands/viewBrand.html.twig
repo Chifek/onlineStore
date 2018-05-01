@@ -85,44 +85,48 @@
         <div class="container">
 
             <div class="row">
-                {% for item in products %}
-                    <div class="col-md-4">
-                        <div class="card mb-4 box-shadow">
-                            {% if item.image is empty %}
-                                <a href="{{ path('view-product', {'id': item.id}) }}">
-                                    <img class="card-img-top" src="{{ asset('defaultImg/noImage.png') }}"
-                                         alt="Card image cap">
-                                </a>
-                            {% else %}
-                                <a href="{{ path('view-product', {'id': item.id}) }}">
-                                    <img class="card-img-top" src="{{ asset('products/img/') }}{{ item.image }}"
-                                         alt="Card image cap">
-                                </a>
-                            {% endif %}
-                            <div class="card-body">
-                                <p style="text-align: center; color: blue; font-size: large;">{{ item.name }}</p>
-                                <p class="card-text">{{ item.description |slice(0,50) }}...</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                        <a href="{{ path('view-product', {'id': item.id}) }}" type="button"
-                                           class="btn btn-sm btn-outline-primary">Посмотреть</a>
-                                        {% if(item.discount != 0) %}
+                {% if products|length > 0 %}
+                    {% for item in products %}
+                        <div class="col-md-4">
+                            <div class="card mb-4 box-shadow">
+                                {% if item.image is empty %}
+                                    <a href="{{ path('view-product', {'id': item.id}) }}">
+                                        <img class="card-img-top" src="{{ asset('defaultImg/noImage.png') }}"
+                                             alt="Card image cap">
+                                    </a>
+                                {% else %}
+                                    <a href="{{ path('view-product', {'id': item.id}) }}">
+                                        <img class="card-img-top" src="{{ asset('products/img/') }}{{ item.image }}"
+                                             alt="Card image cap">
+                                    </a>
+                                {% endif %}
+                                <div class="card-body">
+                                    <p style="text-align: center; color: blue; font-size: large;">{{ item.name }}</p>
+                                    <p class="card-text">{{ item.description |slice(0,50) }}...</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="btn-group">
                                             <a href="{{ path('view-product', {'id': item.id}) }}" type="button"
-                                               class="btn btn-sm btn-danger">Скидка</a>
+                                               class="btn btn-sm btn-outline-primary">Посмотреть</a>
+                                            {% if(item.discount != 0) %}
+                                                <a href="{{ path('view-product', {'id': item.id}) }}" type="button"
+                                                   class="btn btn-sm btn-danger">Скидка</a>
+                                            {% endif %}
+                                        </div>
+                                        {% if(item.discount == 0) %}
+                                            <big class="text-muted">{{ item.price }} сомов</big>
+                                        {% else %}
+                                            <small class="text-muted"
+                                                   style="text-decoration: line-through;">{{ item.price }}</small>
+                                            <big class="text-muted">{{ item.discount }} сомов</big>
                                         {% endif %}
                                     </div>
-                                    {% if(item.discount == 0) %}
-                                        <big class="text-muted">{{ item.price }} сомов</big>
-                                    {% else %}
-                                        <small class="text-muted"
-                                               style="text-decoration: line-through;">{{ item.price }}</small>
-                                        <big class="text-muted">{{ item.discount }} сомов</big>
-                                    {% endif %}
                                 </div>
                             </div>
                         </div>
-                    </div>
-                {% endfor %}
+                    {% endfor %}
+                {% else %}
+                    <p style="text-align: center; color: blue; font-size: large;">К сожалению на данный момент товаров нет</p>
+                {% endif %}
             </div>
         </div>
     </div>

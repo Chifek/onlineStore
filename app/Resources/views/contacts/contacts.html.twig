@@ -1,54 +1,112 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div id="obshyi" style="border-color: black; width: 90%; height: 40%;">
-        <div id="maps" style="margin-left: 85px; height: 300px; margin-top: 70px;">
-            <div class="google-map">
-                <iframe
-                        width="600"
-                        height="450"
-                        frameborder="0" style="border:0"
-                        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0Dx_boXQiwvdz8sJHoYeZNVTdoWONYkU
-    &q=Space+Needle,Seattle+WA" allowfullscreen>
-                </iframe>
-            </div>
-        </div>
-        <div id="contacts" style="float: right; margin-top: -310px;">
-            {% for get in address %}
-                <h2 style="font-family: 'Rubik', sans-serif;font-size: 3rem;">Наши контакты</h2>
-                <h2 style="font-family: 'Rubik', sans-serif;font-size: 1.5rem; color: #767676;">{{ get.address }}</h2>
-                <h2 style="font-family: 'Rubik', sans-serif;font-size: 1.5rem; color: #767676;">{{ get.phone }}</h2>
-            {% endfor %}
-            <form action="{{ path('sendFeedback') }}" method="post">
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="inputName">Имя</label>
-                        <input type="text" class="form-control" id="inputName" placeholder="Имя" name="name" required>
+    {#<div id="obshyi" style="border-color: black; width: 90%; height: 40%;">#}
+    {#<div id="maps" style="margin-left: 85px; height: 300px; margin-top: 70px;">#}
+    {#<div class="google-map">#}
+    {#<iframe#}
+    {#width="600"#}
+    {#height="450"#}
+    {#frameborder="0" style="border:0"#}
+    {#src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0Dx_boXQiwvdz8sJHoYeZNVTdoWONYkU#}
+    {#&q=Space+Needle,Seattle+WA" allowfullscreen>#}
+    {#</iframe>#}
+    {#</div>#}
+    {#</div>#}
+    {#<div id="contacts" style="float: right; margin-top: -310px;">#}
+    {#{% for get in address %}#}
+    {#<h2 style="font-family: 'Rubik', sans-serif;font-size: 3rem;">Наши контакты</h2>#}
+    {#<h2 style="font-family: 'Rubik', sans-serif;font-size: 1.5rem; color: #767676;">{{ get.address }}</h2>#}
+    {#<h2 style="font-family: 'Rubik', sans-serif;font-size: 1.5rem; color: #767676;">{{ get.phone }}</h2>#}
+    {#{% endfor %}#}
+    {#<form action="{{ path('sendFeedback') }}" method="post">#}
+    {#<div class="form-row">#}
+    {#<div class="form-group col-md-6">#}
+    {#<label for="inputName">Имя</label>#}
+    {#<input type="text" class="form-control" id="inputName" placeholder="Имя" name="name" required>#}
+    {#</div>#}
+    {#<div class="form-group col-md-6">#}
+    {#<label for="inputPhone">Телефон</label>#}
+    {#<input type="tel" class="form-control" id="inputPhone" placeholder="Телефон" name="phone"#}
+    {#maxlength="9" required minlength="9">#}
+    {#</div>#}
+    {#</div>#}
+    {#<div class="form-group">#}
+    {#<label for="exampleFormControlTextarea1">Сообщение</label>#}
+    {#<textarea class="form-control" id="exampleFormControlTextarea1" rows="3"#}
+    {#name="description" required></textarea>#}
+    {#</div>#}
+    {#<button type="submit" class="btn btn-primary">Отправить</button>#}
+    {#</form>#}
+    {#<div class="business-hours">#}
+    {#<h2 class="title">Часы работы: </h2>#}
+    {#<ul class="list-unstyled opening-hours">#}
+    {#<li>Воскресенье <span class="pull-right">Закрыто</span></li>#}
+    {#<li>Понедельник <span class="pull-right">9:00-22:00</span></li>#}
+    {#<li>Вторник <span class="pull-right">9:00-22:00</span></li>#}
+    {#<li>Среда <span class="pull-right">9:00-22:00</span></li>#}
+    {#<li>Четверг <span class="pull-right">9:00-22:00</span></li>#}
+    {#<li>Пятница <span class="pull-right">9:00-23:30</span></li>#}
+    {#<li>Суббота <span class="pull-right">14:00-23:30</span></li>#}
+    {#</ul>#}
+    {#</div>#}
+    {#</div>#}
+    {#</div>#}
+    <div class="album py-5 bg-light">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card box-shadow">
+                        <iframe
+                                {#width="600"#}
+                                {#height="450"#}
+                                frameborder="0" style="border:0"
+                                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0Dx_boXQiwvdz8sJHoYeZNVTdoWONYkU
+                &q=Space+Needle,Seattle+WA" allowfullscreen>
+                        </iframe>
                     </div>
-                    <div class="form-group col-md-6">
-                        <label for="inputPhone">Телефон</label>
-                        <input type="tel" class="form-control" id="inputPhone" placeholder="Телефон" name="phone"
-                               maxlength="9" required minlength="9">
+                    <div class="business-hours">
+                        <h2 class="title">Часы работы: </h2>
+                        <ul class="list-unstyled opening-hours">
+                            <li>Воскресенье <span class="pull-right">Закрыто</span></li>
+                            <li>Понедельник <span class="pull-right">9:00-22:00</span></li>
+                            <li>Вторник <span class="pull-right">9:00-22:00</span></li>
+                            <li>Среда <span class="pull-right">9:00-22:00</span></li>
+                            <li>Четверг <span class="pull-right">9:00-22:00</span></li>
+                            <li>Пятница <span class="pull-right">9:00-23:30</span></li>
+                            <li>Суббота <span class="pull-right">14:00-23:30</span></li>
+                        </ul>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="exampleFormControlTextarea1">Сообщение</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
-                              name="description" required></textarea>
+                <div class="col-md-6">
+                    {% for get in address %}
+                        <h2 style="font-family: 'Rubik', sans-serif;font-size: 3rem;">Наши контакты</h2>
+                        <h2 style="font-family: 'Rubik', sans-serif;font-size: 1.5rem; color: #767676;">{{ get.address }}</h2>
+                        <h2 style="font-family: 'Rubik', sans-serif;font-size: 1.5rem; color: #767676;">{{ get.phone }}</h2>
+                    {% endfor %}
+                    <form action="{{ path('sendFeedback') }}" method="post">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputName">Имя</label>
+                                <input type="text" class="form-control" id="inputName" placeholder="Имя" name="name"
+                                       required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputPhone">Телефон</label>
+                                <input type="tel" class="form-control" id="inputPhone" placeholder="Телефон"
+                                       name="phone"
+                                       maxlength="9" required minlength="9">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Сообщение</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                                      name="description" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Отправить</button>
+                    </form>
                 </div>
-                <button type="submit" class="btn btn-primary">Отправить</button>
-            </form>
-            <div class="business-hours">
-                <h2 class="title">Часы работы: </h2>
-                <ul class="list-unstyled opening-hours">
-                    <li>Воскресенье <span class="pull-right">Закрыто</span></li>
-                    <li>Понедельник <span class="pull-right">9:00-22:00</span></li>
-                    <li>Вторник <span class="pull-right">9:00-22:00</span></li>
-                    <li>Среда <span class="pull-right">9:00-22:00</span></li>
-                    <li>Четверг <span class="pull-right">9:00-22:00</span></li>
-                    <li>Пятница <span class="pull-right">9:00-23:30</span></li>
-                    <li>Суббота <span class="pull-right">14:00-23:30</span></li>
-                </ul>
             </div>
         </div>
     </div>

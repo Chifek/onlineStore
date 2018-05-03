@@ -44,6 +44,13 @@ twig:
     globals:
       img_path: '%product_img_directory%'
       store_name: '%storename%'
+      mon: '%mon%'
+      tue: '%tue%'
+      wed: '%wed%'
+      thu: '%thu%'
+      fri: '%fri%'
+      sa: '%sa%'
+      su: '%su%'
 
 # Doctrine Configuration
 doctrine:

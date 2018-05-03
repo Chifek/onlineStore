@@ -1,2 +1,9 @@
 parameters:
-    storename:
+    storename: onlineStore
+    mon: 9:00-22:00
+    tue: 9:00-22:00
+    wed: 9:00-22:00
+    thu: 9:00-22:00
+    fri: 9:00-22:00
+    sa: 9:00-22:00
+    su: Выходной

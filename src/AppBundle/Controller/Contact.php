@@ -37,8 +37,8 @@ class Contact extends Controller
 
         $message = \Swift_Message::newInstance()
             ->setSubject('Отзыв со страницы "Наши контакты"')
-            ->setFrom('from@example.com', 'Site BOT')
-            ->setTo('ruslan@mavix.io')
+            ->setFrom('alenatenn@yandex.ru', 'Site BOT')
+            ->setTo('alenatenn@yandex.ru')
             ->setBody("<strong>" . 'Пользователь: ' . "</strong>" . $name . "<br>" .
                 "<strong>" . 'с телефонным номером: ' . "</strong>" . '+996' . $phone . "<br>" .
                 "<strong>" . 'отправил Вам следующее сообщение: ' . "</strong>" . $description);

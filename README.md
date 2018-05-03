@@ -24,6 +24,8 @@ It takes few minutes, just run these commands step by step:
   `git clone https://github.com/Chifek/onlineStore.git`
   
    `composer install`
+   
+   Copy settings.yml.example to settings.yml and change parameters.
   
 
 Enjoy!

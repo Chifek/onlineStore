@@ -20,7 +20,7 @@
 
             <div class="row">
                 {% if products|length > 0 %}
-                    {% for key, items in products %}
+                    {% for key, items in products|sort|reverse %}
                         {% for value in items %}
                             <div class="col-md-4">
                                 <div class="card mb-4 box-shadow">

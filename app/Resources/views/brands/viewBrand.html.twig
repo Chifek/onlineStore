@@ -80,7 +80,7 @@
             </p>
         </div>
     </section>
-    <a href="/">Главная </a>/ <a href="{{ path('brands') }}">Все бренды </a>/ {% for itemd in brand %} {{ itemd.name }} {% endfor %}
+    <small><a href="/">Главная </a>/ <a href="{{ path('brands') }}">Все бренды </a></small><small style="color: gray;">/ {% for itemd in brand %} {{ itemd.name }} {% endfor %}</smaill>
     <div class="album py-5 bg-light">
         <div class="container">
 

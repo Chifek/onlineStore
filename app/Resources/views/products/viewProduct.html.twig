@@ -31,9 +31,9 @@
                     <div class="col-md-12 bottom-rule">
                         {% if(product.discount != 0) %}
                             <h2 class="product-price"><s
-                                        style="color: red">{{ product.price }}</s> {{ product.discount }}с.</h2>
+                                        style="color: red">{{ product.price|number_format }}</s> {{ product.discount|number_format }}с.</h2>
                         {% else %}
-                            <h2 class="product-price">{{ product.price }} с.</h2>
+                            <h2 class="product-price">{{ product.price|number_format }} с.</h2>
                         {% endif %}
                     </div>
                 </div><!-- end row -->

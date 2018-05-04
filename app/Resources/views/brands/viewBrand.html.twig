@@ -43,12 +43,12 @@
     {#<p>{{ item.description |slice(0,150) }}</p>#}
     {#<p style="color: black; margin: 0 0 10px;">#}
     {#{% if(item.discount == 0) %}#}
-    {#<span style="font-weight: 600;">{{ item.price }} сомов</span>#}
+    {#<span style="font-weight: 600;">{{ item.price }} сом</span>#}
     {#{% else %}#}
     {#<span style="font-weight: 600;color: red;">{{ item.price }}#}
-    {#сомов</span>#}
+    {#сом</span>#}
     {#<span style="color: #999; text-decoration: line-through; margin-left: 10px;">{{ item.discount }}#}
-    {#сомов</span>#}
+    {#сом</span>#}
     {#{% endif %}#}
     {#</p>#}
     {#</div>#}
@@ -113,11 +113,11 @@
                                             {% endif %}
                                         </div>
                                         {% if(item.discount == 0) %}
-                                            <big class="text-muted">{{ item.price }} сомов</big>
+                                            <big class="text-muted">{{ item.price }} сом</big>
                                         {% else %}
                                             <small class="text-muted"
                                                    style="text-decoration: line-through;">{{ item.price }}</small>
-                                            <big class="text-muted">{{ item.discount }} сомов</big>
+                                            <big class="text-muted">{{ item.discount }} сом</big>
                                         {% endif %}
                                     </div>
                                 </div>

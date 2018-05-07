@@ -22,8 +22,10 @@ class Administrator extends Controller
     {
         $repository = $this->getDoctrine()->getRepository(Category::class);
         $categories = $repository->findAll();
+        $repository = $this->getDoctrine()->getRepository(Product::class);
+        $products = $repository->findAll();
 
-        return $this->render('administrator/admin_main.html.twig', ['categories' => $categories]);
+        return $this->render('administrator/admin_main.html.twig', ['products' => $products, 'categories' => $categories]);
     }
 
     /**

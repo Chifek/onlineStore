@@ -1,28 +1,63 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div id="wrapper">
-        <div id="container">
-            <div id="welcome">
-                <h1><span>Добро пожаловать в </span> админ.панель
-                </h1>
-                <p>
-                    <a href="{{ path('adminMainPage') }}">Перейти в главное меню</a>
-                </p>
-            </div>
-            <div id="next">
-                <h2>Редактор товаров</h2>
-                {% for item in products %}
-                    <p title="Цена: {{ item.price }}"><a href="{{ path('admin-edit-product', {'id': item.id}) }}">{{ item.name }}</a></p>
-                    <form class="form-group" action="{{ path('deleteProduct', {'id': item.id}) }}" method="post">
-                        <input type="hidden" name="_method" value="delete">
-                        <button type="submit" class="btn btn-danger">
-                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete
-                        </button>
-                    </form>
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h1 class="jumbotron-heading">Все товары</h1>
+            <p class="lead text-muted">
+                Тут вы можете отредактировать товар. Чтобы сделать это, нажмите на товар.
+            </p>
+            <p>
+                <a href="{{ path('adminMainPage') }}" class="btn btn-secondary">На главную страницу</a>
+            </p>
+        </div>
+    </section>
+    <div class="album py-5 bg-light">
+        <div class="container">
+
+            <div class="row">
+                {% for item in products|sort|reverse %}
+                    <div class="col-md-4">
+                        <div class="card mb-4 box-shadow">
+                            {% if item.image is empty %}
+                                <a href="{{ path('admin-edit-product', {'id': item.id}) }}">
+                                    <img class="card-img-top" src="{{ asset('defaultImg/noImage.png') }}"
+                                         alt="Card image cap">
+                                </a>
+                            {% else %}
+                                <a href="{{ path('admin-edit-product', {'id': item.id}) }}">
+                                    <img class="card-img-top" src="{{ asset('products/img/') }}{{ item.image }}"
+                                         alt="Card image cap">
+                                </a>
+                            {% endif %}
+                            <div class="card-body">
+                                <p style="text-align: center; color: blue; font-size: large;">{{ item.name }}</p>
+                                <p class="card-text">{{ item.description |slice(0,50) }}...</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <a href="{{ path('admin-edit-product', {'id': item.id}) }}" type="button"
+                                           class="btn btn-sm btn-outline-primary">Редактировать</a>
+                                        <a href="{{ path('deleteProduct', {'id': item.id}) }}" type="button"
+                                           class="btn btn-sm btn-danger">Удалить</a>
+
+                                    </div>
+                                    {% if(item.discount == 0) %}
+                                        <big class="text-muted">{{ item.price|number_format }} сом</big>
+                                    {% else %}
+                                        <small class="text-muted"
+                                               style="text-decoration: line-through;">{{ item.price }}</small>
+                                        <big class="text-muted">{{ item.discount|number_format }} сом</big>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 {% endfor %}
 
             </div>
+            <p>
+                <a href="{{ path('adminMainPage') }}" class="btn btn-secondary">На главную страницу</a>
+            </p>
         </div>
     </div>
 {% endblock %}

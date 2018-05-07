@@ -141,16 +141,24 @@
                             <th>Описание</th>
                             <th>Цена</th>
                             <th>Цена со скидкой</th>
+                            <th>Фото</th>
                         </tr>
                         </thead>
                         <tbody>
                         {% for item in products|sort|reverse %}
                             <tr>
                                 <td>{{ item.id }}</td>
-                                <td>{{ item.name }}</td>
+                                <td><a href="{{ path('admin-edit-product', {'id': item.id}) }}">{{ item.name }}</a></td>
                                 <td>{{ item.description |slice(0,50) }}</td>
                                 <td>{{ item.price }}</td>
                                 <td>{{ item.discount }}</td>
+                                <td>
+                                    {% if item.image is empty %}
+                                        Нет
+                                    {% else %}
+                                        Есть
+                                    {% endif %}
+                                </td>
                             </tr>
                         {% endfor %}
                         </tbody>

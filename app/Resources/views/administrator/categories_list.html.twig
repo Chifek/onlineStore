@@ -1,31 +1,39 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div id="wrapper">
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h1 class="jumbotron-heading">Редактор категорий</h1>
+            <p class="lead text-muted">
+                Тут вы можете отредактировать категории.
+            </p>
+            <p>
+                <a href="{{ path('adminMainPage') }}" class="btn btn-secondary">На главную страницу</a>
+            </p>
+        </div>
+    </section>
+    <div class="album py-5 bg-light">
         <div id="container">
-            <div id="welcome">
-                <h1><span>Добро пожаловать в </span> админ.панель
-                </h1>
-                <p>
-                    <a href="{{ path('adminMainPage') }}">Перейти в главное меню</a>
-                </p>
-            </div>
-            <div id="next">
-                <h2>Редактор категорий</h2>
+            <h2>Редактор категорий</h2>
+            <div class="row">
                 {% for item in categories %}
-                    {#<p><a href="{{ path('view-category', {'id': item.id}) }}">{{ item.name }}</a></p>#}
-                    <form action="{{ path('editCategory', {'id': item.id}) }}" method="post">
-                        <input type="text" value="{{ item.name }}" name="category">
-                        <button type="submit" class="btn btn-done">
-                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Сохранить
-                        </button>
-                    </form>
-                    <form class="form-group" action="{{ path('deleteCategory', {'id': item.id}) }}" method="post">
-                        <input type="hidden" name="_method" value="delete">
-                        <button type="submit" class="btn btn-danger">
-                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete
-                        </button>
-                    </form>
+                    <div class="col-md-4">
+                        <div class="card mb-4 box-shadow">
+                            <form action="{{ path('editCategory', {'id': item.id}) }}" method="post">
+                                <input type="text" value="{{ item.name }}" name="category">
+                                <button type="submit" class="btn btn-done">
+                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Сохранить
+                                </button>
+                            </form>
+                            <form class="form-group" action="{{ path('deleteCategory', {'id': item.id}) }}"
+                                  method="post">
+                                <input type="hidden" name="_method" value="delete">
+                                <button type="submit" class="btn btn-danger">
+                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete
+                                </button>
+                            </form>
+                        </div>
+                    </div>
                 {% endfor %}
             </div>
         </div>

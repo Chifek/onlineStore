@@ -1,13 +1,19 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h1 class="jumbotron-heading">Создание нового бренда</h1>
+            <p class="lead text-muted">
+                Тут вы можете создать новый бренд.
+            </p>
+            <p>
+                <a href="{{ path('adminMainPage') }}" class="btn btn-secondary">На главную страницу</a>
+            </p>
+        </div>
+    </section>
     <div id="wrapper">
         <div id="container">
-            <div id="welcome">
-                <h1><span>Добро пожаловать в </span> админ.панель
-                </h1>
-                <a href="{{ path('adminMainPage') }}">На главную админ.панели</a>
-            </div>
             <div id="next">
                 <h2>Добавление бренда: </h2>
                 <p>

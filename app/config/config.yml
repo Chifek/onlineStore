@@ -51,6 +51,7 @@ twig:
       fri: '%fri%'
       sa: '%sa%'
       su: '%su%'
+      google_maps: '%googleMaps%'
 
 # Doctrine Configuration
 doctrine:

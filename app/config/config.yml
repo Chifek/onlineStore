@@ -52,8 +52,6 @@ twig:
       sa: '%sa%'
       su: '%su%'
       google_maps: '%googleMaps%'
-#      google_analitics: '%googleAnalitics%'
-      yandex_metrika: '%yandexMetrika%'
 
 # Doctrine Configuration
 doctrine:

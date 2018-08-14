@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\News;
 use AppBundle\Entity\Category;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -22,9 +23,13 @@ class DefaultController extends Controller
         $repository = $this->getDoctrine()->getRepository(Category::class);
         $categories = $repository->findAll();
 
+        $getNews = $this->getDoctrine()->getRepository(News::class);
+        $news = $getNews->findAll();
+
         return $this->render('default/index.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.project_dir')) . DIRECTORY_SEPARATOR,
-            'categories' => $categories
+            'categories' => $categories,
+            'news' => $news
         ]);
     }
 

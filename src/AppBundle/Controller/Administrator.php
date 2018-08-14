@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\News;
 use AppBundle\Entity\Product;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -304,4 +305,87 @@ class Administrator extends Controller
         }
         return $this->redirectToRoute('stockListBrand');
     }
+
+    /**
+     * @Route("/admin/newsList", name="newsList")
+     */
+    public function newsList()
+    {
+        $repository = $this->getDoctrine()->getRepository(Category::class);
+        $categories = $repository->findAll();
+
+        $repository = $this->getDoctrine()->getRepository(News::class);
+        $news = $repository->findAll();
+
+        return $this->render(':administrator:news_list.html.twig', ['categories' => $categories, 'news' => $news]);
+    }
+
+    /**
+     * @Route("/admin/save-news/{id}", name="admin-save-news")
+     */
+    public function saveOneNews(Request $request, $id)
+    {
+        $image = $request->files->get('img');
+        if ($image !== null) $imageName = date("Ymdis") . $image->getClientOriginalName();
+
+        if (($image instanceof UploadedFile) && ($image->getError() === 0)) {
+            $image->move($this->getParameter('product_img_directory'), $imageName);
+        }
+        $requestAll = $request->request->all();
+
+        $em = $this->getDoctrine()->getManager();
+        $news = $em->getRepository(News::class)->find($id);
+        $news->setArticle($requestAll['article']);
+        $news->setDescription($requestAll['description']);
+
+        if ($image !== null) {
+            $news->setImage($imageName);
+            $news->setType($image->getClientMimeType());
+        }
+        $em->persist($news);
+        $em->flush();
+
+        return $this->redirectToRoute('newsList');
+    }
+
+    /**
+     * @Route("/admin/add-news", name="add-news")
+     */
+    public function addNews(Request $request)
+    {
+        $image = $request->files->get('img');
+        if ($image !== null) $imageName = date("Ymdis") . $image->getClientOriginalName();
+        if (($image instanceof UploadedFile) && ($image->getError() === 0)) {
+            $image->move($this->getParameter('product_img_directory'), $imageName);
+        }
+        $requestAll = $request->request->all();
+        $em = $this->getDoctrine()->getManager();
+        $news = new News();
+        $news->setArticle($requestAll['article']);
+        $news->setDescription($requestAll['description']);
+        if ($image !== null) {
+            $news->setImage($imageName);
+            $news->setType($image->getClientMimeType());
+        }
+
+        $em->persist($news);
+        $em->flush();
+        $news->getId();
+
+        return $this->redirectToRoute('newsList');
+    }
+
+    /**
+     * @Route("/admin/deleteNews/{id}", name="deleteNews")
+     */
+    public function deleteNews($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $news = $em->getRepository(News::class)->find($id);
+        $em->remove($news);
+        $em->flush();
+
+        return $this->redirectToRoute('newsList');
+    }
+
 }

@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h1 class="jumbotron-heading">Редактор категорий</h1>
+            <p class="lead text-muted">
+                Тут вы можете отредактировать список новостей, которые расположены на главной странице.
+            </p>
+            <p>
+                <a href="{{ path('adminMainPage') }}" class="btn btn-secondary">На главную страницу админ панели</a>
+            </p>
+        </div>
+    </section>
+    <div class="album py-5 bg-light">
+        <div id="container">
+            <h2>Редактор новостей</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card mb-4 box-shadow">
+                        <form action="{{ path('add-news') }}" method="post" enctype="multipart/form-data">
+                            <input type="text" name="article">
+                            <br>
+                            <br>
+                            <textarea id="description" name="description"></textarea>
+                            <br>
+                            <br>
+                            <input type="file" name="img">
+                            <button class="btn-done" type="submit">Добавить</button>
+                            <br>
+                            <br>
+                        </form>
+                    </div>
+                </div>
+                {% for onenews in news %}
+                    <div class="col-md-4">
+                        <div class="card mb-4 box-shadow">
+                            <form action="{{ path('admin-save-news', {'id': onenews.id}) }}" method="post"
+                                  enctype="multipart/form-data">
+                                <input type="text" value="{{ onenews.article }}" name="article">
+                                <br>
+                                <br>
+                                <textarea id="description" name="description">{{ onenews.description }}</textarea>
+                                <br>
+                                <br>
+                                <input type="file" name="img">
+                                <button class="btn-done" type="submit">Сохранить</button>
+                                <br>
+                                <br>
+                            </form>
+                            <br>
+                            <form class="form-group" action="{{ path('deleteNews', {'id': onenews.id}) }}"
+                                  method="post">
+                                <input type="hidden" name="_method" value="delete">
+                                <button type="submit" class="btn btn-danger">
+                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}

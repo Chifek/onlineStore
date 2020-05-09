@@ -8,8 +8,8 @@ first-and always will !
 Requirements
 --------------
 
-* PHP
-* PostgreSQL
+* PHP 7.0
+* PostgreSQL 9.6
 * Elasticsearch
 * Composer
 
@@ -35,9 +35,11 @@ Links
 
 * [**How to install Composer**][1]
 * [**How to install Git**][2]
+* [**How to install Elasticsearch**][3]
 
 
 [1]:  https://getcomposer.org/
 [2]:  https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
+[3]:  https://www.digitalocean.com/community/tutorials/how-to-install-elasticsearch-logstash-and-kibana-elastic-stack-on-ubuntu-16-04
 
 

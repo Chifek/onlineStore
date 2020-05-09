@@ -90,24 +90,24 @@ swiftmailer:
     password: '%mailer_password%'
     spool: { type: memory }
 
-fos_elastica:
-    clients:
-        default: { host: localhost, port: 9200 }
-    indexes:
-      app:
-        types:
-          product:
-            properties:
-                name: ~
-                price: ~
-                description: ~
-                discount: ~
-            persistence:
-                # the driver can be orm, mongodb or phpcr
-                driver: orm
-                model: AppBundle\Entity\Product
-                provider: ~
-                finder: ~
+#fos_elastica:
+#    clients:
+#        default: { host: localhost, port: 9200 }
+#    indexes:
+#      app:
+#        types:
+#          product:
+#            properties:
+#                name: ~
+#                price: ~
+#                description: ~
+#                discount: ~
+#            persistence:
+#                # the driver can be orm, mongodb or phpcr
+#                driver: orm
+#                model: AppBundle\Entity\Product
+#                provider: ~
+#                finder: ~
 
 vich_uploader:
     db_driver: orm
